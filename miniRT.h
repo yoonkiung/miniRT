@@ -6,17 +6,18 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/07 19:55:50 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/07 21:17:12 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include "libft/libft.h"
-#include <math.h>
-#include <mlx.h>
-#include "vector3.h"
+# include <math.h>
+# include <mlx.h>
+# include "libft/libft.h"
+# include "vector3.h"
+# include "ray.h"
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17

@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3.h                                          :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 19:51:58 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/07 21:44:37 by daechoi          ###   ########.fr       */
+/*   Created: 2022/11/07 20:42:15 by daechoi           #+#    #+#             */
+/*   Updated: 2022/11/07 21:03:16 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR3_H
-# define VECTOR3_H
+#ifndef RAY_H
+# define RAY_H
 
-#include <math.h>
+# include "vector3.h"
 
-typedef struct s_vec3
+typedef struct s_ray
 {
-	double	x;
-	double	y;
-	double	z;
-}	t_vec3;
+	t_vec3	pos;
+	t_vec3	dir;
+}	t_ray;
 
-t_vec3	vec3_set(double x, double y, double z);
-double	vec3_length(t_vec3 vec);
-double	vec3_distance(t_vec3 vec1, t_vec3 vec2);
-t_vec3	vec3_sub(t_vec3 vec1, t_vec3 vec2);
-double	vec3_dot(t_vec3 vec1, t_vec3 vec2);
+t_vec3	ray_at(t_ray ray, double t)
+{
+	t_vec3 ret;
+
+	ret.x = ray.pos.x + ray.dir.x * t;
+	ret.y = ray.pos.y + ray.dir.y * t;
+	ret.z = ray.pos.z + ray.dir.z * t;
+	return (ret);
+}
 
 #endif

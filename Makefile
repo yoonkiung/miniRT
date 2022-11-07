@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/07 17:26:02 by daechoi          ###   ########.fr        #
+#    Updated: 2022/11/07 22:05:52 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT       = libft
 
 LIBFT_LIB   = libft.a
 
-SRCS        = ./main.c 
+SRCS        = main.c vector3_1.c vector3_2.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -26,7 +26,7 @@ LIBC        = ar rc
 
 CC          = gcc
 
-CFLAGS      = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
