@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/07 16:36:30 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/07 19:55:50 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,67 @@
 
 #include "libft/libft.h"
 #include <math.h>
+#include <mlx.h>
+#include "vector3.h"
+
+# define X_EVENT_KEYPRESS		2
+# define X_EVENT_DESTROYNOTIFY	17
+
+typedef struct s_set
+{
+	void	*mlx;
+	void 	*win;
+}	t_set;
+
+typedef struct s_ambient
+{
+	double	ratio;
+	int		red;
+	int		green;
+	int		blue;
+}	t_ambient;
+
+typedef struct s_camera
+{
+	t_vec3	pos;
+	t_vec3	norm;
+	int		fov;
+}	t_camera;
+
+typedef struct s_light
+{
+	t_vec3	pos;
+	double	ratio;
+}	t_light;
+
+typedef struct s_sphere
+{
+	t_vec3	pos;
+	double 	dia;
+	int 	red;
+	int 	green;
+	int 	blue;
+}	t_sphere;
+
+typedef struct s_plane
+{
+	t_vec3	pos;
+	t_vec3	norm;
+	int 	red;
+	int 	green;
+	int 	blue;
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	t_vec3	pos;
+	t_vec3	norm;
+	double 	dia;
+	double 	height;
+	int 	red;
+	int 	green;
+	int 	blue;
+}	t_cylinder;
 
 typedef struct s_elements
 {
@@ -28,71 +89,5 @@ typedef struct s_elements
 	int			plane_cnt;
 	int 		cylinder_cnt;
 }	t_elements;
-
-typedef struct s_ambient
-{
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
-}	t_ambient;
-
-typedef struct s_camera
-{
-	double	vp_x;
-	double	vp_y;
-	double	vp_z;
-	double	norm_x;
-	double	norm_y;
-	double	norm_z;
-	int		fov;
-}	t_camera;
-
-typedef struct s_light
-{
-	double	light_x;
-	double	light_y;
-	double 	light_z;
-	double	ratio;
-}	t_light;
-
-typedef struct s_sphere
-{
-	double 	pos_x;
-	double 	pos_y;
-	double 	pos_z;
-	double 	dia;
-	int 	red;
-	int 	green;
-	int 	blue;
-}	t_sphere;
-
-typedef struct s_plane
-{
-	double 	pos_x;
-	double	pos_y;
-	double 	pos_z;
-	double 	norm_x;
-	double 	norm_y;
-	double 	norm_z;
-	int 	red;
-	int 	green;
-	int 	blue;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	double 	pos_x;
-	double 	pos_y;
-	double 	pos_z;
-	double 	norm_x;
-	double 	norm_y;
-	double 	norm_z;
-	double 	dia;
-	double 	height;
-	int 	red;
-	int 	green;
-	int 	blue;
-}	t_cylinder;
 
 #endif
