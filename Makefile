@@ -28,15 +28,18 @@ CC          = gcc
 
 CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
+MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
+
+ARCH		= arch -x86_64
 
 $(NAME) : $(OBJS)
 	make all -C $(LIBFT)/
 	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_LIB)
+	$(ARCH) $(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) $(LIBFT_LIB)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-	
+.c.o: $(SRC)
+	$(CC) $(CFLAGS) -c $^
+
 all : $(NAME)
 
 fclean : clean
