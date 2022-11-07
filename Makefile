@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/07 15:04:46 by kiyoon           ###   ########.fr        #
+#    Updated: 2022/11/07 16:39:08 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
-ARCH		= arch -x86_64
+# ARCH		= arch -x86_64
 
 $(NAME) : $(OBJS)
 	make all -C $(LIBFT)/
 	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(ARCH) $(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) $(LIBFT_LIB)
 
 .c.o: $(SRC)
 	$(CC) $(CFLAGS) -c $^
