@@ -112,4 +112,14 @@ int		parse_sphere(char **buffer, t_elements *element);
 
 void	ft_exit(int a);
 
+int		is_end_rt(char *file);
+
+bool	split_type(char **temp, t_elements *element);
+
+bool	split_newline(int fd, t_elements *element);
+
+void init_variable(t_elements *element);
+
+bool init(int ac, char **av, t_elements *element);
+
 #endif
