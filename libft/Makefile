@@ -55,7 +55,8 @@ FILES = ft_isalpha \
 		get_next_line \
 		ft_strcpy \
 		ft_malloc \
-		ft_free
+		ft_free \
+		ft_atof
 
 FILES_B = 	ft_lstnew \
 	  		ft_lstsize \

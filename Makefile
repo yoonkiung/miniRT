@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/07 22:05:52 by daechoi          ###   ########.fr        #
+#    Updated: 2022/11/08 18:39:50 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT       = libft
 
 LIBFT_LIB   = libft.a
 
-SRCS        = main.c vector3_1.c vector3_2.c
+SRCS        = main.c vector3_1.c vector3_2.c camera.c parse_A.c parse_C.c parse_L.c parse_plane.c parse_cylinder.c parse_sphere.c util1.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -26,11 +26,9 @@ LIBC        = ar rc
 
 CC          = gcc
 
-CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
-
-# ARCH		= arch -x86_64
 
 $(NAME) : $(OBJS)
 	make all -C $(LIBFT)/
