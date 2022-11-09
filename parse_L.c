@@ -15,12 +15,15 @@
 int	parse_l(char **buffer, t_elements *element)
 {
 	char	**position;
+	char	**rgb;
 
 	if (element->light)
 		return (0);
-	if (split_num(buffer) != 4)
-		return (0);
 	position = ft_split(buffer[1], ", ");
+	rgb = ft_split(buffer[3], ", ");
+	if (split_num(buffer) != 4 || split_num(position) != 3 \
+		|| split_num(rgb) != 3)
+		return (0);
 	element->light = ft_malloc(sizeof(t_light));
 	element->light->pos.x = ft_atof(position[0]);
 	element->light->pos.y = ft_atof(position[1]);

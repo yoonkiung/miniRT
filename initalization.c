@@ -24,29 +24,22 @@ int	is_end_rt(char *file)
 	else
 		return (0);
 }
-
 bool	split_type(char **temp, t_elements *element)
 {
-	if (ft_strcmp(temp[0], "A") == 0){
-		if (!parse_a(temp, element))
-			return (false);}
-	else if (ft_strcmp(temp[0], "C") == 0){
-		if (!parse_c(temp, element))
-			return (false);}
-	else if (ft_strcmp(temp[0], "L") == 0){
-		if (!parse_l(temp, element))
-			return (false);}
-	else if (ft_strcmp(temp[0], "sp") == 0){
-		if (!parse_sphere(temp, element))
-			return (false);}
-	else if (ft_strcmp(temp[0], "pl") == 0){
-		if (!parse_plane(temp, element))
-			return (false);}
-	else if (ft_strcmp(temp[0], "cy") == 0){
-		if (!parse_cylinder(temp, element))
-			return (false);}
-	else{
-		return (false);}
+	if (ft_strcmp(temp[0], "A") == 0)
+		return(parse_a(temp, element));
+	else if (ft_strcmp(temp[0], "C") == 0)
+		return(parse_c(temp, element));
+	else if (ft_strcmp(temp[0], "L") == 0)
+		return(parse_l(temp, element));
+	else if (ft_strcmp(temp[0], "sp") == 0)
+		return(parse_sphere(temp, element));
+	else if (ft_strcmp(temp[0], "pl") == 0)
+		return(parse_plane(temp, element));
+	else if (ft_strcmp(temp[0], "cy") == 0)
+		return(parse_cylinder(temp, element));
+	else
+		return (false);
 	return (true);
 }
 
@@ -66,12 +59,12 @@ bool	split_newline(int fd, t_elements *element)
 			free_char(temp);
 		}
 		free(line);
-		line = get_next_line(fd);	
+		line = get_next_line(fd);
 	}
 	return (true);
 }
 
-void init_variable(t_elements *element)
+void	init_variable(t_elements *element)
 {
 	element->amb = NULL;
 	element->cam = NULL;
@@ -84,7 +77,7 @@ void init_variable(t_elements *element)
 	element->cylinder_cnt = 0;
 }
 
-bool init(int ac, char **av, t_elements *element)
+bool	init(int ac, char **av, t_elements *element)
 {
 	int	fd;
 
@@ -94,7 +87,7 @@ bool init(int ac, char **av, t_elements *element)
 	fd = is_end_rt(av[1]);
 	if (!fd)
 		return (false);
-	if(!split_newline(fd, element))
+	if (!split_newline(fd, element))
 		return (false);
 	return (true);
 }

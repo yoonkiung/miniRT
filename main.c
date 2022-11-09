@@ -90,5 +90,8 @@ int main(int ac, char **av)
 
 	if (!init(ac, av, &element))
 		ft_exit(1);
+	system("leaks miniRT");
+	while (1)
+	{}
 	return (1);
 }
