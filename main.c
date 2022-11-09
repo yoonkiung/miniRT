@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/08 18:43:34 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/08 19:14:55 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int hit_sphere(t_sphere sp, t_ray ray)
     oc = vec3_sub(ray.pos, sp.pos);
     a = vec3_dot(ray.dir, ray.dir);
     b = vec3_dot(oc, ray.dir);
-    c = vec3_dot(oc, oc) - ((sp.dia / 2) * (sp.dia / 2));
+    c = vec3_dot(oc, oc) - ((sp.dia / 2.0) * (sp.dia / 2.0));
     discriminant = b * b - a * c;
 	//printf("%f\n", discriminant);
-    if (discriminant >= 0)
-        return (1);
+    if (discriminant > 0)
+        return (0);
     else
         return (0);
 }
@@ -98,24 +98,25 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_sphere sp, t_eleme
 	// int b = 255;
 
 	ele->cam->pos = vec3_set(0, 0, 0);
-	double vp_h = 2.0;
+	double vp_h = 1600.0;
 	double vp_w = 16.0 / 9.0 * vp_h;
 	double focal = 1.0;
 	t_vec3 hor = vec3_set(vp_w, 0, 0);
 	t_vec3 ver = vec3_set(0, vp_h, 0);
-	t_vec3 llc = vec3_sub(vec3_sub(vec3_sub(ele->cam->pos, vec3_dmul(1 / 2, hor)), vec3_dmul(1 / 2, ver)), vec3_set(0, 0, focal));
+	t_vec3 llc = vec3_sub(vec3_sub(vec3_sub(ele->cam->pos, vec3_dmul(1/2, hor)), vec3_dmul(1/2, ver)), vec3_set(0, 0, focal));
 	double u = (double)x / (double)(1600 - 1);
     double v = (double)y / (double)(900 - 1);
 	ray->pos = ele->cam->pos;
 	ray->dir = vec3_sub(vec3_add(vec3_add(llc, vec3_dmul(u, hor)), vec3_dmul(v, ver)), ray->pos);
-    double t = 0.5 * (vec3_unit(ray->dir).y + 1.0);
-    t_vec3 color = vec3_dmul(255.999, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1.0, 1.0, 1.0)), \
-                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
+    double t;
+    t_vec3 color;
 	if (hit_sphere(sp, *ray))
+		color = vec3_set(255,0,0);
+	else
 	{
-		color.x = 100;
-		color.y = 0;
-		color.z = 0;
+		t = 0.5 * (vec3_unit(ray->dir).y + 1.0);
+		color = vec3_dmul(255.999, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1.0, 1.0, 1.0)), \
+                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
 	}
     rgb_color = ((int)color.x << 16) | ((int)color.y << 8) | (int)color.z;
     dst = img->data + (x * (img->bpp / 8)) + ((900 - y - 1) * img->size_l);
@@ -196,7 +197,7 @@ int main(int ac, char **av)
     int count_h = 900;
 	int count_w;
 	sph.pos = vec3_set(1, 1, 0);
-	sph.dia = 2.0;
+	sph.dia = 1.0;
 	sph.red = 255;
 	sph.green = 100;
 	sph.blue = 255;
