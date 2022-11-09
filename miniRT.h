@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/08 18:40:05 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/09 20:48:57 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17
+
+typedef struct s_hitten_object
+{
+	char					type;
+	void 					*elements;
+	struct s_hitten_object	*next;
+}	t_hitten_object;
 
 typedef struct s_set
 {
@@ -91,6 +98,7 @@ typedef struct s_elements
 	t_sphere 	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	t_ray		*ray;
 	int			sphere_cnt;
 	int			plane_cnt;
 	int 		cylinder_cnt;
@@ -111,5 +119,15 @@ int		parse_cylinder(char **buffer, t_elements *element);
 int		parse_sphere(char **buffer, t_elements *element);
 
 void	ft_exit(int a);
+
+int		is_end_rt(char *file);
+
+bool	split_type(char **temp, t_elements *element);
+
+bool	split_newline(int fd, t_elements *element);
+
+void init_variable(t_elements *element);
+
+bool init(int ac, char **av, t_elements *element);
 
 #endif

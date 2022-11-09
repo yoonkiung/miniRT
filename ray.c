@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 20:42:15 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/09 19:56:20 by daechoi          ###   ########.fr       */
+/*   Created: 2022/11/09 16:28:44 by daechoi           #+#    #+#             */
+/*   Updated: 2022/11/09 16:30:17 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "ray.h"
 
-# include "vector3.h"
-
-typedef struct s_ray
+t_vec3    ray_at(t_ray *ray, double t)
 {
-	t_vec3	pos;
-	t_vec3	dir;
-}	t_ray;
+    t_vec3 at;
 
-typedef struct s_hit_record
-{
-    t_vec3	pos;
-    t_vec3	norm;
-    double	tmin;
-    double	tmax;
-    double	t;
-    bool	isfront;
-}	t_hit_record;
-
-t_vec3    ray_at(t_ray *ray, double t);
-
-#endif
+    at = vec3_add(ray->pos, vec3_dmul(t, ray->dir));
+    return (at);
+}

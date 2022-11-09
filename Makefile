@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/08 18:44:23 by daechoi          ###   ########.fr        #
+#    Updated: 2022/11/09 16:33:59 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ LIBFT       = libft
 
 LIBFT_LIB   = libft.a
 
-SRCS        = main.c vector3_1.c vector3_2.c camera.c parse_A.c parse_C.c parse_L.c parse_plane.c parse_cylinder.c parse_sphere.c util1.c \
-
+SRCS        = main.c vector3_1.c vector3_2.c camera.c parse_A.c parse_C.c parse_L.c parse_plane.c parse_cylinder.c parse_sphere.c util1.c ray.c \
+				initalization.c
 
 OBJS        = $(SRCS:.c=.o)
 

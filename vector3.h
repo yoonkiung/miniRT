@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:51:58 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/08 16:33:31 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/09 15:00:11 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define VECTOR3_H
 
 #include <math.h>
+#include "libft/libft.h"
+#include "stdlib.h"
 
 typedef struct s_vec3
 {

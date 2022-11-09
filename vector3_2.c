@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:01:56 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/08 16:33:24 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/09 14:59:13 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ t_vec3	vec3_unit(t_vec3 vec)
 {
 	t_vec3	ret;
 	
+	if (!vec3_length(vec))
+	{
+		ft_putstr_fd("Error: divided by 0\n", 2);
+		exit(1);
+	}
 	ret.x = vec.x / vec3_length(vec);
 	ret.y = vec.y / vec3_length(vec);
 	ret.z = vec.z / vec3_length(vec);
