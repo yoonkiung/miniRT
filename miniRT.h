@@ -118,8 +118,10 @@ bool	split_type(char **temp, t_elements *element);
 
 bool	split_newline(int fd, t_elements *element);
 
-void init_variable(t_elements *element);
+void 	init_variable(t_elements *element);
 
-bool init(int ac, char **av, t_elements *element);
+bool 	init(int ac, char **av, t_elements *element);
+
+int		split_num(char **buffer);
 
 #endif

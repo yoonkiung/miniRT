@@ -18,6 +18,8 @@ int	parse_l(char **buffer, t_elements *element)
 
 	if (element->light)
 		return (0);
+	if (split_num(buffer) != 4)
+		return (0);
 	position = ft_split(buffer[1], ", ");
 	element->light = ft_malloc(sizeof(t_light));
 	element->light->pos.x = ft_atof(position[0]);

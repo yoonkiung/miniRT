@@ -30,3 +30,13 @@ void	ft_exit(int a)
 	ft_putstr_fd("Error\n", 1);
 	exit(a);
 }
+
+int	split_num(char **buffer)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i])
+		i++;
+	return (i);
+}

@@ -35,6 +35,8 @@ int	parse_cylinder(char **buffer, t_elements *element)
 	char		**rgb;
 	t_cylinder	*temp;
 
+	if (split_num(buffer) != 6)
+		return (0);
 	temp = ft_malloc(sizeof(t_cylinder));
 	position = ft_split(buffer[1], ", ");
 	norm = ft_split(buffer[2], ", ");

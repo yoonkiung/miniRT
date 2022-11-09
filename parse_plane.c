@@ -35,6 +35,8 @@ int	parse_plane(char **buffer, t_elements *element)
 	char	**rgb;
 	t_plane	*temp;
 
+	if (split_num(buffer) != 4)
+		return (0);
 	temp = ft_malloc(sizeof(t_plane));
 	position = ft_split(buffer[1], ", ");
 	norm = ft_split(buffer[2], ", ");

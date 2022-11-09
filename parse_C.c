@@ -20,6 +20,8 @@ int parse_c(char **buffer, t_elements *element)
 
 	if (element->cam)
 		return (0);
+	if (split_num(buffer) != 4)
+		return (0);
 	position = ft_split(buffer[1], ", ");
 	norm = ft_split(buffer[2], ", ");
 	element->cam = ft_malloc(sizeof(t_camera));
