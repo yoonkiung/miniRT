@@ -34,9 +34,13 @@ int	parse_sphere(char **buffer, t_elements *element)
 	char		**position;
 	char		**rgb;
 
+	if (split_num(buffer) != 4)
+		return (0);
 	temp = ft_malloc(sizeof(t_sphere));
 	position = ft_split(buffer[1], ", ");
 	rgb = ft_split(buffer[3], ", ");
+	if (split_num(position) != 3 || split_num(rgb) != 3)
+		return (0);
 	temp->pos.x = ft_atof(position[0]);
 	temp->pos.y = ft_atof(position[1]);
 	temp->pos.z = ft_atof(position[2]);

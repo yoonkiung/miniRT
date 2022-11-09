@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/09 20:48:09 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/09 20:51:19 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,5 @@ int main(int ac, char **av)
 	mlx_loop(set.mlx);
 	free(set.mlx);
 	return (0);
+
 }

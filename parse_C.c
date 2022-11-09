@@ -13,15 +13,19 @@
 #include "miniRT.h"
 #include <stdio.h>
 
-int parse_c(char **buffer, t_elements *element)
+int	parse_c(char **buffer, t_elements *element)
 {
 	char	**position;
 	char	**norm;
 
 	if (element->cam)
 		return (0);
+	if (split_num(buffer) != 4)
+		return (0);
 	position = ft_split(buffer[1], ", ");
 	norm = ft_split(buffer[2], ", ");
+	if (split_num(position) != 3 || split_num(norm) != 3)
+		return (0);
 	element->cam = ft_malloc(sizeof(t_camera));
 	element->cam->pos.x = ft_atof(position[0]);
 	element->cam->pos.y = ft_atof(position[1]);
