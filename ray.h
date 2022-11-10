@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:42:15 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/09 19:56:20 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/10 19:04:32 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_hit_record
     double	tmax;
     double	t;
     bool	isfront;
+	t_vec3	albedo;
 }	t_hit_record;
 
 t_vec3    ray_at(t_ray *ray, double t);

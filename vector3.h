@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:51:58 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/09 15:00:11 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/10 20:39:44 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec3_mul(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec3_dmul(double d, t_vec3 vec);
 t_vec3	vec3_unit(t_vec3 vec);
+t_vec3	vec3_min(t_vec3 vec1, t_vec3 vec2);
 void vec3_print(t_vec3 vec);
 
 #endif

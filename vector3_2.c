@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:01:56 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/09 14:59:13 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/10 21:03:21 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ t_vec3	vec3_unit(t_vec3 vec)
 	ret.z = vec.z / vec3_length(vec);
 	return (ret);
 }
+
+t_vec3	vec3_min(t_vec3 vec1, t_vec3 vec2)
+{
+	t_vec3 ret;
+
+	if (vec1.x < vec2.x)
+		ret.x = vec1.x;
+	else
+		ret.x = vec2.x;
+	if (vec1.y < vec2.y)
+		ret.y = vec1.y;
+	else
+		ret.y = vec2.y;
+	if (vec1.z < vec2.z)
+		ret.z = vec1.z;
+	else
+		ret.z = vec2.z;
+	return (ret);
+}
+
 #include <stdio.h>
 void vec3_print(t_vec3 vec)
 {

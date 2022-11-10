@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/09 20:48:57 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/10 19:23:31 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef struct s_elements
 	int			plane_cnt;
 	int			cylinder_cnt;
 }	t_elements;
+
+t_vec3	phong_light(t_elements *ele, t_hit_record *rec);
 
 void	free_char(char **buffer);
 
