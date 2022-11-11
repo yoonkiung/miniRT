@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/10 21:50:56 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/11 16:50:11 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
     return (vec3_sub(v, vec3_dmul(vec3_dot(v, n) * 2, n)));
 }
+
+bool	in_shadow(t_elements *ele, t_ray *light_ray)
+{
+	t_hit_record	rec;
+
+	rec.tmin = 0;
+	rec.tmax = INFINITY;
+	if (hit(ele, &rec, light_ray))
+		return (true);
+	return (false);
+}
+
 #include <stdio.h>
 t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 {
@@ -32,17 +44,27 @@ t_vec3	point_light(t_elements *ele, t_hit_record *rec)
     double      ks;
 
 
+	double		light_length;
+	t_ray		light_ray;
+
 	light_dir = vec3_unit(vec3_sub(ele->light->pos, rec->pos));
 	ratio = fmax(vec3_dot(rec->norm, light_dir), 0.0);
-	diffuse = vec3_dmul(ratio, vec3_set(1, 1, 1));
+	diffuse = vec3_dmul(ratio, vec3_set(0.3, 0.3, 0.3));
 
 
 	view_dir = vec3_unit(vec3_dmul(-1, ele->ray->dir));
     reflect_dir = reflect(vec3_dmul(-1, light_dir), rec->norm);
-    ksn = 128; // shininess value
+    ksn = 64; // shininess value
     ks = 0.5; // specular strength
     spec = pow(fmax(vec3_dot(view_dir, reflect_dir), 0.0), ksn);
     specular = vec3_dmul(spec, vec3_dmul(ks, vec3_set(1, 1, 1)));
+
+
+	light_length = vec3_length(vec3_sub(ele->light->pos, rec->pos));
+	light_ray.pos = vec3_add(rec->pos, vec3_dmul(1e-6, rec->norm));
+	light_ray.dir = vec3_sub(ele->light->pos, rec->pos);
+	if (in_shadow(ele, &light_ray))
+		return (vec3_set(0, 0, 0));
     return (vec3_add(diffuse, specular));
 }
 

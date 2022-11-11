@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/10 21:22:22 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/11 17:40:21 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 	return (true);
 }
 
-bool hit(t_elements *ele, t_hit_record *rec)
+bool hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 {
 	//t_hitten_object	hobj;
 	bool		ishit;
@@ -81,7 +81,7 @@ bool hit(t_elements *ele, t_hit_record *rec)
 	cur = ele->sphere;
 	while (cur)
 	{
-		if (hit_sphere(cur, ele->ray, rec))
+		if (hit_sphere(cur, ray, rec))
 		{
 			ishit = true;
 			rec->tmax = rec->t;
@@ -100,16 +100,17 @@ t_vec3	ray_color(t_elements *ele)
 
 	rec.tmin = 1e-6;
 	rec.tmax = INFINITY;
-	temp = hit(ele, &rec);
+	temp = hit(ele, &rec, ele->ray);
 	if (temp)
 	{
-		ret = vec3_dmul(255, vec3_dmul(0.5, vec3_add(rec.norm, vec3_set(1, 1, 1))));
+		// ret = vec3_dmul(255, vec3_dmul(0.5, vec3_add(rec.norm, vec3_set(1, 1, 1))));
+		ret = vec3_set(190,100,0);
 		ret = vec3_mul(ret, phong_light(ele, &rec));
 	}
 	else
 	{
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
-		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1.0, 1.0, 1.0)), \
+		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
                     vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
 	}
 	return (ret);
@@ -123,12 +124,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele)
 	ele->cam->pos = vec3_set(0, 0, 0);
 	double vp_h = 2.0;
 	double vp_w = (1600.0 / 900.0) * vp_h;
-	double focal = 1.0;
+	double focal = 2.0;
 	t_vec3 hor = vec3_set(vp_w, 0, 0);
 	t_vec3 ver = vec3_set(0, vp_h, 0);
 	// t_vec3 llc = vec3_sub(vec3_sub(vec3_set(ele->cam->pos.x - 1/2 * vp_h, ele->cam->pos.y - 1/2 * vp_h, ele->cam->pos.z - 1/2 * vp_h)), vec3_dmul(1/2)), vec3_set(0, 0, focal));
 	t_vec3 llc = vec3_set(0 - vp_w / 2, 0 - vp_h / 2, -focal);
-	//sleep(100);
 	double u = (double)x / (double)(1600 - 1);
     double v = (double)y / (double)(900 - 1);
 	ray->pos = ele->cam->pos;
@@ -161,18 +161,26 @@ int main(int ac, char **av)
 	ele->sphere->next->next = NULL;
 	ele->cam = malloc(sizeof(t_camera));
 	ele->ray = malloc(sizeof(t_ray));
-	ele->sphere->pos = vec3_set(-3, -3, -5);
+	ele->sphere->pos = vec3_set(-3, 0, -5);
 	ele->sphere->dia = 2.0;
 	ele->sphere->next->pos = vec3_set(0,0,-5);
 	ele->sphere->next->dia = 2.0;
+	ele->sphere->next->next = malloc(sizeof(t_sphere));
+	ele->sphere->next->next->pos = vec3_set(0, -106, -10);
+	ele->sphere->next->next->dia = 200;
+	ele->sphere->next->next->next = NULL;
+	ele->sphere->next->next->next = malloc(sizeof(t_sphere));
+	ele->sphere->next->next->next->pos = vec3_set(3, 0, -5);
+	ele->sphere->next->next->next->dia = 2.0;
+	ele->sphere->next->next->next->next = NULL;
 	ele->amb = malloc(sizeof(t_ambient));
 	ele->amb->red = 1;
 	ele->amb->green = 1;
 	ele->amb->blue = 1;
 	ele->amb->ratio = 0.1;
 	ele->light = malloc(sizeof(t_light));
-	ele->light->pos = vec3_set(0, 10, 2);
-	ele->light->ratio = 0.3;
+	ele->light->pos = vec3_set(0, 10, 0);
+	ele->light->ratio = 0.5;
     while (--count_h >= 0)
     {
         count_w = -1;
