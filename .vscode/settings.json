@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"minirt.h": "c",
+		"stdio.h": "c",
+		"vector3.h": "c",
+		"ray.h": "c"
+	}
+}
