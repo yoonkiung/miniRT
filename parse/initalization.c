@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 int	is_end_rt(char *file)
 {
@@ -24,6 +24,7 @@ int	is_end_rt(char *file)
 	else
 		return (0);
 }
+
 bool	split_type(char **temp, t_elements *element)
 {
 	if (ft_strcmp(temp[0], "A") == 0)
@@ -61,6 +62,8 @@ bool	split_newline(int fd, t_elements *element)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!element->amb || !element->cam || !element->light)
+		return (false);
 	return (true);
 }
 
@@ -89,5 +92,6 @@ bool	init(int ac, char **av, t_elements *element)
 		return (false);
 	if (!split_newline(fd, element))
 		return (false);
+	element->ray = ft_malloc(sizeof(t_ray));
 	return (true);
 }

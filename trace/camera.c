@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 // t_ray	set_ray(t_elements ele, double aspect_ratio)
 // {

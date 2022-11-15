@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-#include <stdio.h>
+#include "../miniRT.h"
 
 int	parse_c(char **buffer, t_elements *element)
 {

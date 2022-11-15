@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector3.h"
+#include "../vector3.h"
 
 t_vec3	vec3_set(double x, double y, double z)
 {

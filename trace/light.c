@@ -6,11 +6,11 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/11 16:50:11 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:51:37 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 t_vec3	reflect(t_vec3 v, t_vec3 n)
 {
@@ -28,7 +28,6 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 	return (false);
 }
 
-#include <stdio.h>
 t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 {
 	t_vec3	diffuse;
@@ -74,7 +73,7 @@ t_vec3	phong_light(t_elements *ele, t_hit_record *rec)
 	t_vec3	ambient;
 
 	rec->albedo = vec3_set(2, 2, 2);
-	ambient = vec3_dmul(ele->amb->ratio, vec3_set(ele->amb->red, ele->amb->green, ele->amb->blue));
+	ambient = vec3_dmul(ele->amb->ratio, vec3_set((double)ele->amb->red / 255, (double)ele->amb->green / 255, (double)ele->amb->blue / 255));
 	ret = vec3_set(0, 0, 0);
 	ret = vec3_add(ret, point_light(ele, rec));
 	ret = vec3_add(ret, ambient); // ambient

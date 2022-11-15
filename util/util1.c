@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
 void	free_char(char **buffer)
 {
@@ -39,4 +39,10 @@ int	split_num(char **buffer)
 	while (buffer[i])
 		i++;
 	return (i);
+}
+
+int	exit_game(t_set *set)
+{
+	mlx_destroy_window(set->mlx, set->win);
+	exit(0);
 }

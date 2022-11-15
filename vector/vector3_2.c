@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector3.h"
+#include "../vector3.h"
 
 t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
 {
@@ -45,7 +45,7 @@ t_vec3	vec3_dmul(double d, t_vec3 vec)
 t_vec3	vec3_unit(t_vec3 vec)
 {
 	t_vec3	ret;
-	
+
 	if (!vec3_length(vec))
 	{
 		ft_putstr_fd("Error: divided by 0\n", 2);

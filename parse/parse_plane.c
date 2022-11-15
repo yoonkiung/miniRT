@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cylinder.c                                   :+:      :+:    :+:   */
+/*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:15:01 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/08 14:15:04 by kiyoon           ###   ########.fr       */
+/*   Created: 2022/11/08 14:00:09 by kiyoon            #+#    #+#             */
+/*   Updated: 2022/11/08 14:00:09 by kiyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
-static void	insert_last(t_cylinder *temp, t_elements *element)
+static void	insert_last(t_plane *temp, t_elements *element)
 {
-	t_cylinder	*cur;
+	t_plane	*cur;
 
-	cur = element->cylinder;
-	element->cylinder_cnt++;
+	cur = element->plane;
+	element->plane_cnt++;
 	if (!cur)
-		element->cylinder = temp;
+		element->plane = temp;
 	else
 	{
 		while (cur->next)
@@ -28,7 +28,7 @@ static void	insert_last(t_cylinder *temp, t_elements *element)
 	}
 }
 
-static void	put_variable(t_cylinder *temp, char **position, \
+static void	put_variable(t_plane *temp, char **position, \
 					char **norm, char **rgb)
 {
 	temp->pos.x = ft_atof(position[0]);
@@ -40,27 +40,25 @@ static void	put_variable(t_cylinder *temp, char **position, \
 	temp->red = ft_atoi(rgb[0]);
 	temp->green = ft_atoi(rgb[1]);
 	temp->blue = ft_atoi(rgb[2]);
+	temp->next = NULL;
 }
 
-int	parse_cylinder(char **buffer, t_elements *element)
+int	parse_plane(char **buffer, t_elements *element)
 {
-	char		**position;
-	char		**norm;
-	char		**rgb;
-	t_cylinder	*temp;
+	char	**position;
+	char	**norm;
+	char	**rgb;
+	t_plane	*temp;
 
-	if (split_num(buffer) != 6)
+	if (split_num(buffer) != 4)
 		return (0);
-	temp = ft_malloc(sizeof(t_cylinder));
+	temp = ft_malloc(sizeof(t_plane));
 	position = ft_split(buffer[1], ", ");
 	norm = ft_split(buffer[2], ", ");
-	rgb = ft_split(buffer[5], ", ");
+	rgb = ft_split(buffer[3], ", ");
 	if (split_num(position) != 3 || split_num(norm) != 3 || split_num(rgb) != 3)
 		return (0);
-	put_variable(temp, position, norm, buffer);
-	temp->dia = ft_atof(buffer[3]);
-	temp->height = ft_atof(buffer[4]);
-	temp->next = NULL;
+	put_variable(temp, position, norm, rgb);
 	insert_last(temp, element);
 	free_char(position);
 	free_char(norm);
