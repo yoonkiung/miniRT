@@ -77,7 +77,7 @@ bool hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 
 t_vec3	ray_color(t_elements *ele)
 {
-	double 			t;
+	// double 			t;
 	t_hit_record	rec;
 	t_vec3 			ret;
 	bool 			temp;
@@ -90,12 +90,17 @@ t_vec3	ray_color(t_elements *ele)
 		// ret = vec3_dmul(255, vec3_dmul(0.5, vec3_add(rec.norm, vec3_set(1, 1, 1))));
 		ret = vec3_set(190,100,0);
 		ret = vec3_mul(ret, phong_light(ele, &rec));
+		// printf("x, y, z %lf %lf %lf\n", ret.x, ret.y, ret.z);
 	}
 	else
 	{
-		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
-		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
-                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
+		// t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
+		// ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
+        //             vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
+		// ret = vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
+        //             vec3_dmul(t, vec3_set(0.5, 0.7, 1.0)));
+		ret = vec3_set((double)ele->amb->red, (double)ele->amb->green, (double)ele->amb->blue);
+		// printf("x, y, z %lf %lf %lf\n", ret.x, ret.y, ret.z);
 	}
 	return (ret);
 }
