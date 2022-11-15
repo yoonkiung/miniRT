@@ -175,4 +175,10 @@ int		exit_game(t_set *set);
 
 void	set_keyhook(t_set *set);
 
+void	hit_sp(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+
+void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+
+void	set_isfront(t_ray *ray, t_hit_record *rec);
+
 #endif

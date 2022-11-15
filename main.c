@@ -23,58 +23,14 @@ void	set_isfront(t_ray *ray, t_hit_record *rec)
 	}
 }
 
-bool hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
-{
-    t_vec3  oc;
-    double  a;
-    double  half_b;
-    double  c;
-    double  discriminant;
-	double	sqrtd;
-	double	root;
-
-    oc = vec3_sub(ray->pos, sp->pos);
-    a = vec3_dot(ray->dir, ray->dir);
-    half_b = vec3_dot(oc, ray->dir);
-    c = vec3_dot(oc, oc) - ((sp->dia / 2) * (sp->dia / 2));
-    discriminant = half_b * half_b - a * c;
-	if (discriminant <= 0)
-		return (false);
-	sqrtd = sqrt(discriminant);
-	root = (-half_b - sqrtd) / a;
-	if (root < rec->tmin || root > rec->tmax)
-	{
-		root = (-half_b + sqrtd) / a;
-		if (root < rec->tmin || root > rec->tmax)
-			return (false);
-	}
-	rec->t = root;
-	rec->pos = ray_at(ray, root);
-	rec->norm = vec3_dmul(1 / (sp->dia / 2), vec3_sub(rec->pos, sp->pos));
-	set_isfront(ray, rec);
-	return (true);
-}
-
 t_vec3 hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 {
-	//t_hitten_object	hobj;
-	bool		ishit;
-	t_sphere	*cur;
 	t_vec3		ret;
 
 	ret = vec3_set(-1, -1, -1);
-	ishit = false;
-	cur = ele->sphere;
-	while (cur)
-	{
-		if (hit_sphere(cur, ray, rec))
-		{
-			ishit = true;
-			ret = vec3_set(cur->red, cur->green, cur->blue);
-			rec->tmax = rec->t;
-		}
-		cur = cur->next;
-	}
+	
+	hit_sp(ele, rec, ray, &ret);
+	hit_pl(ele, rec, ray, &ret);
 	return (ret);
 }
 

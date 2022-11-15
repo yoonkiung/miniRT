@@ -10,9 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
-bool	hit_plane(t_plane *sp, t_ray *ray, t_hit_record *rec)
+bool	hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec)
 {
+	double	numrator;
+	double	denominator;
+	double	root;
 
+	denominator = vec3_dot(ray->dir, pl->norm);
+	if (denominator < 0)
+		return (false);
+	numrator = vec3_dot(vec3_sub(pl->pos, ray->pos), pl->norm);
+	root = numrator / denominator;
+	if (root < rec->tmin || rec->tmax < root) 
+		return (false);
+	rec->t = root;
+	rec->pos = ray_at(ray, root);
+	return (true);
 }
+
+void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
+{
+	t_plane	*cur;
+
+	cur = ele->plane;
+	while (cur)
+	{
+		if (hit_plane(cur, ray, rec))
+		{
+			*ret = vec3_set(cur->red, cur->green, cur->blue);
+			rec->tmax = rec->t;
+		}
+		cur = cur->next;
+	}
+}
+
+
