@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/11 17:40:21 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:11:04 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ t_vec3	ray_color(t_elements *ele)
 	temp = hit(ele, &rec, ele->ray);
 	if (temp)
 	{
-		// ret = vec3_dmul(255, vec3_dmul(0.5, vec3_add(rec.norm, vec3_set(1, 1, 1))));
-		ret = vec3_set(190,100,0);
+		ret = vec3_set(100,100,100);
 		ret = vec3_mul(ret, phong_light(ele, &rec));
 	}
 	else
