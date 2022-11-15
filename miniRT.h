@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/11 16:50:37 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:12:11 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define X_EVENT_DESTROYNOTIFY	17
 # define WIDTH	1600
 # define HEIGHT 900
+
+# define CAM 0
+# define SPHERE 1
+# define PLANE 2
+# define CYLINDER 3
+
+# define INCREASE 0
+# define DECREASE 1
 
 typedef struct s_hitten_object
 {
@@ -117,9 +125,17 @@ typedef struct s_elements
 	int			cylinder_cnt;
 }	t_elements;
 
+typedef struct s_select
+{
+	int		type;
+	void	*object;
+}	t_select;
+
+void	move_x(t_set *set, int flag);
+
 t_vec3	phong_light(t_elements *ele, t_hit_record *rec);
 
-bool	hit(t_elements *ele, t_hit_record *rec, t_ray *ray);
+t_vec3	hit(t_elements *ele, t_hit_record *rec, t_ray *ray);
 
 void	free_char(char **buffer);
 

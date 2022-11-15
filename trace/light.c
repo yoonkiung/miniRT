@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/11 16:50:11 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:30:21 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 
 	rec.tmin = 0;
 	rec.tmax = INFINITY;
-	if (hit(ele, &rec, light_ray))
+	if (hit(ele, &rec, light_ray).x != -1)
 		return (true);
 	return (false);
 }
@@ -73,11 +73,9 @@ t_vec3	phong_light(t_elements *ele, t_hit_record *rec)
 	t_vec3	ambient;
 
 	rec->albedo = vec3_set(2, 2, 2);
-	ambient = vec3_dmul(ele->amb->ratio, vec3_set(ele->amb->red, ele->amb->green, ele->amb->blue));
+	ambient = vec3_dmul(ele->amb->ratio, vec3_set((double)ele->amb->red / 255, (double)ele->amb->green / 255, (double)ele->amb->blue / 255));
 	ret = vec3_set(0, 0, 0);
-	ret = vec3_add(ret, vec3_dmul(255, point_light(ele, rec)));
+	ret = vec3_add(ret, point_light(ele, rec));
 	ret = vec3_add(ret, ambient); // ambient
-	t_vec3	temp = vec3_min(vec3_mul(ret, rec->albedo), vec3_set(255, 255, 255));
-	printf("temp %lf %lf %lf\n", temp.x, temp.y, temp.z);
-	return (temp);
+	return (vec3_min(vec3_mul(ret, rec->albedo), vec3_set(1, 1, 1)));
 }

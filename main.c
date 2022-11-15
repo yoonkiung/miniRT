@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/11 17:40:21 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:40:40 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ bool hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 	return (true);
 }
 
-bool hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
+t_vec3 hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 {
 	//t_hitten_object	hobj;
 	bool		ishit;
 	t_sphere	*cur;
+	t_vec3		ret;
 
+	ret = vec3_set(-1, -1, -1);
 	ishit = false;
 	cur = ele->sphere;
 	while (cur)
@@ -68,39 +70,32 @@ bool hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 		if (hit_sphere(cur, ray, rec))
 		{
 			ishit = true;
+			ret = vec3_set(cur->red, cur->green, cur->blue);
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;
 	}
-	return (ishit);
+	return (ret);
 }
 
 t_vec3	ray_color(t_elements *ele)
 {
-	// double 			t;
+	double 			t;
 	t_hit_record	rec;
 	t_vec3 			ret;
-	bool 			temp;
 
 	rec.tmin = 1e-6;
 	rec.tmax = INFINITY;
-	temp = hit(ele, &rec, ele->ray);
-	if (temp)
+	ret = hit(ele, &rec, ele->ray);
+	if (ret.x != -1)
 	{
-		// ret = vec3_dmul(255, vec3_dmul(0.5, vec3_add(rec.norm, vec3_set(1, 1, 1))));
-		ret = vec3_set(190,100,0);
 		ret = vec3_mul(ret, phong_light(ele, &rec));
-		// printf("x, y, z %lf %lf %lf\n", ret.x, ret.y, ret.z);
 	}
 	else
 	{
-		// t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
-		// ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
-        //             vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
-		// ret = vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
-        //             vec3_dmul(t, vec3_set(0.5, 0.7, 1.0)));
-		ret = vec3_set((double)ele->amb->red, (double)ele->amb->green, (double)ele->amb->blue);
-		// printf("x, y, z %lf %lf %lf\n", ret.x, ret.y, ret.z);
+		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
+		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
+                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
 	}
 	return (ret);
 }
