@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 19:17:13 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:03:06 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele)
 int main(int ac, char **av)
 {
 	t_elements	ele;
-	t_img 		img;
 	t_set 		set;
 
 	if (!init(ac, av, &ele))
 		ft_exit(1);
-	set_mlx(&set, &img);
-    drawing(&ele, &set, &img);
+	set_mlx(&set, &ele);
+    drawing(&set);
 	set_keyhook(&set);
 	mlx_loop(set.mlx);
 	free(set.mlx);
