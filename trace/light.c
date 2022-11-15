@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/15 16:51:37 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:30:21 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 
 	rec.tmin = 0;
 	rec.tmax = INFINITY;
-	if (hit(ele, &rec, light_ray))
+	if (hit(ele, &rec, light_ray).x != -1)
 		return (true);
 	return (false);
 }

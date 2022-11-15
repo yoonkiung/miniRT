@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:36:28 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 16:33:10 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:01:27 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	key_hook(int keycode, t_set *set)
 		mlx_destroy_window(set->mlx, set->win);
 		exit(1);
 	}
-	// else if (keycode == 12)
-	// else if (keycode == 0)
+	else if (keycode == 12)
+		move_x(set, INCREASE);
+	else if (keycode == 0)
+		move_x(set, DECREASE);
 	// else if (keycode == 13)
 	// else if (keycode == 1)
 	// else if (keycode == 14)

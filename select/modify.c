@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   modify.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 18:55:05 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 18:55:06 by kiyoon           ###   ########.fr       */
+/*   Created: 2022/11/15 18:57:31 by daechoi           #+#    #+#             */
+/*   Updated: 2022/11/15 19:13:38 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT.h"
 
-bool	hit_plane(t_plane *sp, t_ray *ray, t_hit_record *rec)
+void	move_x(t_set *set, int flag)
 {
-
+	(void)set;
+	(void)flag;
 }
