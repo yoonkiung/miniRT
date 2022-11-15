@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/15 19:12:11 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:35:58 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,6 @@ typedef struct  s_img
     int     bpp;
     int     endian;
 }   t_img;
-
-typedef struct s_set
-{
-	void	*mlx;
-	void	*win;
-}	t_set;
-
-
-typedef struct s_ambient
-{
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
-}	t_ambient;
 
 typedef struct s_camera
 {
@@ -111,6 +96,23 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
+typedef struct s_select
+{
+	int			type;
+	t_camera	*cam;
+	t_sphere	*sp;
+	t_plane		*pl;
+	t_cylinder	*cy;
+}	t_select;
+
+typedef struct s_ambient
+{
+	double	ratio;
+	int		red;
+	int		green;
+	int		blue;
+}	t_ambient;
+
 typedef struct s_elements
 {
 	t_ambient	*amb;
@@ -125,13 +127,24 @@ typedef struct s_elements
 	int			cylinder_cnt;
 }	t_elements;
 
-typedef struct s_select
+typedef struct s_set
 {
-	int		type;
-	void	*object;
-}	t_select;
+	void		*mlx;
+	void		*win;
+	t_select	*select;
+	t_elements	*ele;
+	t_img		*img;
+}	t_set;
 
-void	move_x(t_set *set, int flag);
+t_select	*init_select(t_camera *cam);
+
+void	rotate_x(t_select *select, int flag);
+
+void	move_x(t_select *select, int flag);
+
+void	move_y(t_select *select, int flag);
+
+void	move_z(t_select *select, int flag);
 
 t_vec3	phong_light(t_elements *ele, t_hit_record *rec);
 
@@ -165,9 +178,9 @@ bool	init(int ac, char **av, t_elements *element);
 
 int		split_num(char **buffer);
 
-void	set_mlx(t_set *set, t_img *img);
+void	set_mlx(t_set *set, t_elements *ele);
 
-void	drawing(t_elements *ele, t_set *set, t_img *img);
+void	drawing(t_set *set);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele);
 

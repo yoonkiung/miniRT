@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 19:17:13 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 20:03:06 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,15 @@ bool hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 
 t_vec3 hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 {
-	//t_hitten_object	hobj;
-	bool		ishit;
 	t_sphere	*cur;
 	t_vec3		ret;
 
 	ret = vec3_set(-1, -1, -1);
-	ishit = false;
 	cur = ele->sphere;
 	while (cur)
 	{
 		if (hit_sphere(cur, ray, rec))
 		{
-			ishit = true;
 			ret = vec3_set(cur->red, cur->green, cur->blue);
 			rec->tmax = rec->t;
 		}
@@ -121,13 +117,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele)
 int main(int ac, char **av)
 {
 	t_elements	ele;
-	t_img 		img;
 	t_set 		set;
 
 	if (!init(ac, av, &ele))
 		ft_exit(1);
-	set_mlx(&set, &img);
-    drawing(&ele, &set, &img);
+	set_mlx(&set, &ele);
+    drawing(&set);
 	set_keyhook(&set);
 	mlx_loop(set.mlx);
 	free(set.mlx);
