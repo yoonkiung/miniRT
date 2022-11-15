@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 18:40:40 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/15 19:17:13 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ t_vec3	ray_color(t_elements *ele)
 	rec.tmax = INFINITY;
 	ret = hit(ele, &rec, ele->ray);
 	if (ret.x != -1)
-	{
 		ret = vec3_mul(ret, phong_light(ele, &rec));
-	}
 	else
 	{
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
