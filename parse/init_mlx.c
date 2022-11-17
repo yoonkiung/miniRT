@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:36:28 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 20:35:46 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:55:03 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ int	key_hook(int keycode, t_set *set)
 		rotate_x(set->select, INCREASE);
 	else if (keycode == 3)
 		rotate_x(set->select, DECREASE);
-	// else if (keycode == 17)
-	// else if (keycode == 5)
-	// else if (keycode == 16)
-	// else if (keycode == 4)
+	else if (keycode == 17)
+		rotate_y(set->select, INCREASE);
+	else if (keycode == 5)
+		rotate_y(set->select, DECREASE);
+	else if (keycode == 16)
+		rotate_z(set->select, INCREASE);
+	else if (keycode == 4)
+		rotate_z(set->select, DECREASE);
 	drawing(set);
 	return (0);
 }
@@ -70,7 +74,7 @@ void	drawing(t_set *set)
 	while (--count_h >= 0)
     {
         count_w = -1;
-        while (++count_w < 1600)
+        while (++count_w < WIDTH)
 				my_mlx_pixel_put(set->img, count_w, count_h, set->ele->ray, set->ele);
     }
     mlx_put_image_to_window(set->mlx, set->win, set->img->img_ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 20:03:06 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:52:59 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,14 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele)
 	double	focal = 2.0;
 	t_vec3 hor = vec3_set(vp_w, 0, 0);
 	t_vec3 ver = vec3_set(0, vp_h, 0);
-	t_vec3 llc = vec3_set(0 - vp_w / 2, 0 - vp_h / 2, -focal);
-	double u = (double)x / (double)(1600 - 1);
-    double v = (double)y / (double)(900 - 1);
+	t_vec3 llc = vec3_set((0 - vp_w / 2) + ele->cam->norm.x, (0 - vp_h / 2) + ele->cam->norm.y, -focal + ele->cam->norm.z);
+	double u = (double)x / (double)(WIDTH - 1);
+    double v = (double)y / (double)(HEIGHT - 1);
 	ray->pos = ele->cam->pos;
     ray->dir = vec3_unit(vec3_sub(vec3_add(vec3_add(llc, vec3_dmul(u, hor)), vec3_dmul(v, ver)), ray->pos));
 	t_vec3 color = ray_color(ele);
     rgb_color = ((int)color.x << 16) | ((int)color.y << 8) | (int)color.z;
-    dst = img->data + (x * (img->bpp / 8)) + ((900 - y - 1) * img->size_l);
+    dst = img->data + (x * (img->bpp / 8)) + ((HEIGHT - y - 1) * img->size_l);
 	*(unsigned int *)dst = rgb_color;
 }
 

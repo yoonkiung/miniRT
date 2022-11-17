@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/15 20:35:58 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:56:00 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17
-# define WIDTH	1600
-# define HEIGHT 900
+# define WIDTH	400
+# define HEIGHT 300
 
 # define CAM 0
 # define SPHERE 1
@@ -135,6 +135,10 @@ typedef struct s_set
 	t_elements	*ele;
 	t_img		*img;
 }	t_set;
+
+void	rotate_y(t_select *select, int flag);
+
+void	rotate_z(t_select *select, int flag);
 
 t_select	*init_select(t_camera *cam);
 
