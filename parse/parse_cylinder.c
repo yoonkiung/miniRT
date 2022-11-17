@@ -57,7 +57,7 @@ int	parse_cylinder(char **buffer, t_elements *element)
 	rgb = ft_split(buffer[5], ", ");
 	if (split_num(position) != 3 || split_num(norm) != 3 || split_num(rgb) != 3)
 		return (0);
-	put_variable(temp, position, norm, buffer);
+	put_variable(temp, position, norm, rgb);
 	temp->dia = ft_atof(buffer[3]);
 	temp->height = ft_atof(buffer[4]);
 	temp->next = NULL;

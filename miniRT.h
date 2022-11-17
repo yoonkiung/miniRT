@@ -200,4 +200,6 @@ void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
 void	set_isfront(t_ray *ray, t_hit_record *rec);
 
+void	hit_cy(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+
 #endif
