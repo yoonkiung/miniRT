@@ -35,6 +35,8 @@
 # define INCREASE 0
 # define DECREASE 1
 
+# define EPSILON 1e-6
+
 typedef struct s_hitten_object
 {
 	char					type;

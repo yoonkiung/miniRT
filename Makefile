@@ -21,7 +21,6 @@ SRCS        =./main.c \
 				trace/camera.c trace/ray.c trace/light.c \
 				parse/init_mlx.c parse/initalization.c parse/parse_A.c parse/parse_C.c parse/parse_L.c parse/parse_plane.c parse/parse_cylinder.c parse/parse_sphere.c \
 				util/util1.c \
-				select/modify.c select/select.c \
 				figure/plane.c figure/sphere.c \
 				select/move.c select/select.c select/rotate.c
 

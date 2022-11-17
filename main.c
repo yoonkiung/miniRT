@@ -28,7 +28,6 @@ t_vec3 hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 	t_vec3		ret;
 
 	ret = vec3_set(-1, -1, -1);
-	
 	hit_sp(ele, rec, ray, &ret);
 	hit_pl(ele, rec, ray, &ret);
 	return (ret);
