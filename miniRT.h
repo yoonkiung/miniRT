@@ -24,8 +24,8 @@
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17
-# define WIDTH	400
-# define HEIGHT 300
+# define WIDTH	1600
+# define HEIGHT 900
 
 # define CAM 0
 # define SPHERE 1

@@ -14,7 +14,7 @@
 
 t_vec3	vec3_set(double x, double y, double z)
 {
-	t_vec3 vec;
+	t_vec3	vec;
 
 	vec.x = x;
 	vec.y = y;
@@ -29,12 +29,14 @@ double	vec3_length(t_vec3 vec)
 
 double	vec3_distance(t_vec3 vec1, t_vec3 vec2)
 {
-	return (sqrt(pow(vec1.x - vec2.x, 2.0) + pow((vec1.y - vec2.y), 2.0) + pow((vec1.z - vec2.z), 2.0)));
+	return (sqrt(pow(vec1.x - vec2.x, 2.0) + \
+	pow((vec1.y - vec2.y), 2.0) + \
+	pow((vec1.z - vec2.z), 2.0)));
 }
 
 t_vec3	vec3_sub(t_vec3 vec1, t_vec3 vec2)
 {
-	t_vec3 vec;
+	t_vec3	vec;
 
 	vec.x = vec1.x - vec2.x;
 	vec.y = vec1.y - vec2.y;

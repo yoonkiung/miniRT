@@ -28,17 +28,17 @@ int	is_end_rt(char *file)
 bool	split_type(char **temp, t_elements *element)
 {
 	if (ft_strcmp(temp[0], "A") == 0)
-		return(parse_a(temp, element));
+		return (parse_a(temp, element));
 	else if (ft_strcmp(temp[0], "C") == 0)
-		return(parse_c(temp, element));
+		return (parse_c(temp, element));
 	else if (ft_strcmp(temp[0], "L") == 0)
-		return(parse_l(temp, element));
+		return (parse_l(temp, element));
 	else if (ft_strcmp(temp[0], "sp") == 0)
-		return(parse_sphere(temp, element));
+		return (parse_sphere(temp, element));
 	else if (ft_strcmp(temp[0], "pl") == 0)
-		return(parse_plane(temp, element));
+		return (parse_plane(temp, element));
 	else if (ft_strcmp(temp[0], "cy") == 0)
-		return(parse_cylinder(temp, element));
+		return (parse_cylinder(temp, element));
 	else
 		return (false);
 	return (true);
