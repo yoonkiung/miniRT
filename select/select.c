@@ -60,6 +60,23 @@ void	hit_pl_select(t_set *set, t_hit_record *rec, t_ray *ray)
 	}
 }
 
+void	hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray)
+{
+	t_cylinder	*cur;
+
+	cur = set->ele->cylinder;
+	while (cur)
+	{
+		if (hit_cylinder(cur, ray, rec))
+		{
+			set->select->type = CYLINDER;
+			set->select->cy = cur;
+			rec->tmax = rec->t;
+		}
+		cur = cur->next;
+	}
+}
+
 void	ray_select(t_set *set, t_ray *ray)
 {
 	t_hit_record	rec;
@@ -68,6 +85,7 @@ void	ray_select(t_set *set, t_ray *ray)
 	rec.tmax = INFINITY;
 	hit_sp_select(set, &rec, ray);
 	hit_pl_select(set, &rec, ray);
+	hit_cy_select(set, &rec, ray);
 }
 
 t_select	*select_object(t_set *set)

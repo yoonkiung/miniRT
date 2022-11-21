@@ -17,7 +17,7 @@ int	cy_boundary(t_cylinder *cy, t_vec3 at_point)
 	double	hit_height;
 	double	max_height;
 
-	hit_height = vec3_dot(vec3_sub(at_point, cy->pos), cy->norm);
+	hit_height = vec3_dot(vec3_sub(at_point, cy->pos), vec3_unit(cy->norm));
 	max_height = cy->height / 2;
 	if (fabs(hit_height) > max_height)
 		return (0);
@@ -29,7 +29,7 @@ t_vec3      get_cylinder_normal(t_cylinder *cy, t_vec3 at_point, double hit_heig
     t_vec3 hit_center;
     t_vec3 normal;
 
-    hit_center = vec3_add(cy->pos, vec3_dmul(hit_height, cy->norm));
+    hit_center = vec3_add(cy->pos, vec3_dmul(hit_height, vec3_unit(cy->norm)));
     normal = vec3_sub(at_point, hit_center);
 
     return (vec3_unit(normal));
@@ -38,8 +38,8 @@ t_vec3      get_cylinder_normal(t_cylinder *cy, t_vec3 at_point, double hit_heig
 int      hit_cylinder_cap(t_cylinder *cy, t_ray *ray, t_hit_record *rec, double height)
 {
     const double r = cy->dia / 2;
-    const t_vec3    circle_center = vec3_add(cy->pos, vec3_dmul(height, cy->norm));
-    const double root = vec3_dot(vec3_sub(circle_center, ray->pos), cy->norm) / vec3_dot(ray->dir, cy->norm);
+    const t_vec3    circle_center = vec3_add(cy->pos, vec3_dmul(height, vec3_unit(cy->norm)));
+    const double root = vec3_dot(vec3_sub(circle_center, ray->pos), vec3_unit(cy->norm)) / vec3_dot(ray->dir, vec3_unit(cy->norm));
     // printf("ray->pos : %lf %lf %lf\n", ray->pos.x, ray->pos.y, ray->pos.z);
 	const double diameter = vec3_length(vec3_sub(circle_center, ray_at(ray, root)));
     // printf("---------------\n");
@@ -78,7 +78,7 @@ int      hit_cylinder_side(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
     double hit_height;
     
     u = ray->dir;
-    o = cy->norm;
+    o = vec3_unit(cy->norm);
     r = cy->dia / 2;
     delta_P = vec3_sub(ray->pos, cy->pos);
     a = vec3_length(vec3_cross(u, o)) * vec3_length(vec3_cross(u, o));
