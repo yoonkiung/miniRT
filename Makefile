@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/15 20:36:12 by daechoi          ###   ########.fr        #
+#    Updated: 2022/11/21 15:43:10 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@ LIBFT_LIB   = libft.a
 
 SRCS        =./main.c \
 				vector/vector3_1.c vector/vector3_2.c \
-				trace/camera.c trace/ray.c trace/light.c \
+				trace/ray.c trace/light.c \
 				parse/init_mlx.c parse/initalization.c parse/parse_A.c parse/parse_C.c parse/parse_L.c parse/parse_plane.c parse/parse_cylinder.c parse/parse_sphere.c \
 				util/util1.c \
 				figure/plane.c figure/sphere.c \
-				select/move.c select/select.c select/rotate.c
+				select/move.c select/select.c select/rotate.c select/resize.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -32,7 +32,7 @@ LIBC        = ar rc
 
 CC          = gcc
 
-CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror -g3# -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 

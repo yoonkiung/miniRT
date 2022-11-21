@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:34:57 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/15 19:34:59 by kiyoon           ###   ########.fr       */
+/*   Updated: 2022/11/21 16:07:04 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-bool hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
+void	set_isfront(t_ray *ray, t_hit_record *rec)
+{
+	if (vec3_dot(ray->dir, rec->norm) < 0)
+		rec->isfront = true;
+	else
+	{
+		rec->isfront = false;
+		rec->norm = vec3_dmul(-1.0, rec->norm);
+	}
+}
+
+bool	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 {
     t_vec3  oc;
     double  a;

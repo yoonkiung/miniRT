@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:01:56 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/10 21:03:21 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:48:26 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
 {
-	t_vec3 ret;
+	t_vec3	ret;
 
 	ret.x = vec1.x + vec2.x;
 	ret.y = vec1.y + vec2.y;
@@ -24,7 +24,7 @@ t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
 
 t_vec3	vec3_mul(t_vec3 vec1, t_vec3 vec2)
 {
-	t_vec3 ret;
+	t_vec3	ret;
 
 	ret.x = vec1.x * vec2.x;
 	ret.y = vec1.y * vec2.y;
@@ -34,7 +34,7 @@ t_vec3	vec3_mul(t_vec3 vec1, t_vec3 vec2)
 
 t_vec3	vec3_dmul(double d, t_vec3 vec)
 {
-	t_vec3 ret;
+	t_vec3	ret;
 
 	ret.x = vec.x * d;
 	ret.y = vec.y * d;
@@ -59,7 +59,7 @@ t_vec3	vec3_unit(t_vec3 vec)
 
 t_vec3	vec3_min(t_vec3 vec1, t_vec3 vec2)
 {
-	t_vec3 ret;
+	t_vec3	ret;
 
 	if (vec1.x < vec2.x)
 		ret.x = vec1.x;
@@ -74,10 +74,4 @@ t_vec3	vec3_min(t_vec3 vec1, t_vec3 vec2)
 	else
 		ret.z = vec2.z;
 	return (ret);
-}
-
-#include <stdio.h>
-void vec3_print(t_vec3 vec)
-{
-	printf("(%f, %f, %f)\n", vec.x, vec.y, vec.z);
 }
