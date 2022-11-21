@@ -21,3 +21,8 @@ t_vec3	vec3_cross(t_vec3 vec1, t_vec3 vec2)
 	cross.z = vec1.x * vec2.y - vec1.y * vec2.x;
 	return (cross);
 }
+
+double	vec3_length2(t_vec3 vec)
+{
+	return (pow(vec.x, 2.0) + pow(vec.y, 2.0) + pow(vec.z, 2.0));
+}
