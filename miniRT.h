@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/17 16:56:00 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:08:05 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SPHERE 1
 # define PLANE 2
 # define CYLINDER 3
+# define LIGHT 4
 
 # define INCREASE 0
 # define DECREASE 1
@@ -58,6 +59,9 @@ typedef struct s_camera
 	t_vec3	pos;
 	t_vec3	norm;
 	int		fov;
+	t_vec3	hor;
+	t_vec3	ver;
+	t_vec3	llc;
 }	t_camera;
 
 typedef struct s_light
@@ -105,6 +109,9 @@ typedef struct s_select
 	t_sphere	*sp;
 	t_plane		*pl;
 	t_cylinder	*cy;
+	t_light		*light;
+	int			mouse_x;
+	int			mouse_y;
 }	t_select;
 
 typedef struct s_ambient
@@ -138,11 +145,25 @@ typedef struct s_set
 	t_img		*img;
 }	t_set;
 
+void	set_isfront(t_ray *ray, t_hit_record *rec);
+
+void	move_rotate(int keycode, t_set *set);
+
+void	init_camera(t_camera *cam);
+
+void	resize(t_select *select, int flag);
+
+bool	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec);
+
+bool	hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec);
+
+t_select	*select_object(t_set *set);
+
 void	rotate_y(t_select *select, int flag);
 
 void	rotate_z(t_select *select, int flag);
 
-t_select	*init_select(t_camera *cam);
+t_select	*init_select(t_camera *cam, t_light *light);
 
 void	rotate_x(t_select *select, int flag);
 
@@ -188,7 +209,7 @@ void	set_mlx(t_set *set, t_elements *ele);
 
 void	drawing(t_set *set);
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, t_ray *ray, t_elements *ele);
+void	my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele);
 
 int		exit_game(t_set *set);
 

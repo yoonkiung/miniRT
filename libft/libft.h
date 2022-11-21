@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 15:23:20 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/08/20 17:04:30 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 16:10:19 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ void	*ft_malloc(size_t size);
 
 void	ft_free(void *str);
 
-double	ft_atof(char* s);
+double	ft_atof(char *s);
 
 #endif
