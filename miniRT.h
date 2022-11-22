@@ -225,4 +225,8 @@ void	hit_cy(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
 int		hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
 
+double	minf(double a, double b);
+
+double	maxf(double a, double b);
+
 #endif

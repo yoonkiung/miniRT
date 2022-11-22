@@ -46,3 +46,17 @@ int	exit_game(t_set *set)
 	mlx_destroy_window(set->mlx, set->win);
 	exit(0);
 }
+
+double	minf(double a, double b)
+{
+	if (a > b)
+		return (b);
+	return (a);
+}
+
+double	maxf(double a, double b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
