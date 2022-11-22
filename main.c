@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/21 16:45:34 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 20:12:19 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec3	hit(t_elements *ele, t_hit_record *rec, t_ray *ray)
 
 t_vec3	ray_color(t_elements *ele)
 {
+	double			t;
 	t_hit_record	rec;
 	t_vec3			ret;
 
@@ -34,11 +35,15 @@ t_vec3	ray_color(t_elements *ele)
 	if (ret.x != -1)
 		ret = vec3_mul(ret, phong_light(ele, &rec));
 	else
-		ret = vec3_set(255, 255, 255);
+	{
+		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
+		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
+                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
+	}
 	return (ret);
 }
 
-void	init_camera(t_camera *cam)
+void	fixed_camera(t_camera *cam, t_ray *ray)
 {
 	double	vp_h;
 	double	vp_w;
@@ -47,10 +52,11 @@ void	init_camera(t_camera *cam)
 	vp_h = 2.0;
 	vp_w = ((double)WIDTH / (double)HEIGHT) * vp_h;
 	focal = (vp_w / 2.0 * 90) / cam->fov;
-	cam->hor = vec3_set(cam->pos.x + vp_w, cam->pos.y, cam->pos.z);
-	cam->ver = vec3_set(cam->pos.x, cam->pos.y + vp_h, cam->pos.z);
+	cam->hor = vec3_set(vp_w, 0, 0);
+	cam->ver = vec3_set(0, vp_h, 0);
 	cam->llc = vec3_set((cam->pos.x - vp_w / 2) \
 		+ cam->norm.x, (cam->pos.y - vp_h / 2) + cam->norm.y, -focal + cam->norm.z);
+	ray->pos = cam->pos;
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele)
@@ -63,8 +69,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele)
 
 	u = (double)x / (double)(WIDTH - 1);
 	v = (double)y / (double)(HEIGHT - 1);
-	init_camera(ele->cam);
-	ele->ray->pos = ele->cam->pos;
+	fixed_camera(ele->cam, ele->ray);
 	ele->ray->dir = vec3_unit(vec3_sub(vec3_add(vec3_add(ele->cam->llc, \
 		vec3_dmul(u, ele->cam->hor)), vec3_dmul(v, ele->cam->ver)), \
 		ele->ray->pos));
@@ -84,6 +89,7 @@ int	main(int ac, char **av)
 	set_mlx(&set, &ele);
 	drawing(&set);
 	set_keyhook(&set);
+	print_manual();
 	mlx_loop(set.mlx);
 	free(set.mlx);
 	return (0);

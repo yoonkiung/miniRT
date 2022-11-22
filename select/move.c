@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:57:31 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 16:00:24 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 18:50:17 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	move_z(t_select *select, int flag)
 
 void	move_rotate(int keycode, t_set *set)
 {
-	if (keycode == 12)
+	if (keycode == 2)
 		move_x(set->select, INCREASE);
 	else if (keycode == 0)
 		move_x(set->select, DECREASE);
@@ -96,7 +96,7 @@ void	move_rotate(int keycode, t_set *set)
 		move_y(set->select, DECREASE);
 	else if (keycode == 14)
 		move_z(set->select, INCREASE);
-	else if (keycode == 2)
+	else if (keycode == 12)
 		move_z(set->select, DECREASE);
 	else if (keycode == 15)
 		rotate_x(set->select, INCREASE);

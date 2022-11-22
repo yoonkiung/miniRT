@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:44:45 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 16:38:32 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 18:44:51 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,55 +26,67 @@ t_select	*init_select(t_camera *cam, t_light *light)
 	return (select);
 }
 
-void	hit_sp_select(t_set *set, t_hit_record *rec, t_ray *ray)
+bool	hit_sp_select(t_set *set, t_hit_record *rec, t_ray *ray)
 {
 	t_sphere	*cur;
+	bool		flag;
 
 	cur = set->ele->sphere;
+	flag = false;
 	while (cur)
 	{
 		if (hit_sphere(cur, ray, rec))
 		{
+			flag = true;
 			set->select->type = SPHERE;
 			set->select->sp = cur;
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;
 	}
+	return (flag);
 }
 
-void	hit_pl_select(t_set *set, t_hit_record *rec, t_ray *ray)
+bool	hit_pl_select(t_set *set, t_hit_record *rec, t_ray *ray)
 {
 	t_plane	*cur;
+	bool	flag;
 
 	cur = set->ele->plane;
+	flag = false;
 	while (cur)
 	{
 		if (hit_plane(cur, ray, rec))
 		{
+			flag = true;
 			set->select->type = PLANE;
 			set->select->pl = cur;
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;
 	}
+	return (flag);
 }
 
-void	hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray)
+bool	hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray)
 {
 	t_cylinder	*cur;
+	bool		flag;
 
 	cur = set->ele->cylinder;
+	flag = false;
 	while (cur)
 	{
 		if (hit_cylinder(cur, ray, rec))
 		{
+			flag = true;
 			set->select->type = CYLINDER;
 			set->select->cy = cur;
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;
 	}
+	return (flag);
 }
 
 void	ray_select(t_set *set, t_ray *ray)
@@ -83,9 +95,10 @@ void	ray_select(t_set *set, t_ray *ray)
 
 	rec.tmin = 0;
 	rec.tmax = INFINITY;
-	hit_sp_select(set, &rec, ray);
-	hit_pl_select(set, &rec, ray);
-	hit_cy_select(set, &rec, ray);
+	if (!hit_sp_select(set, &rec, ray) \
+		&& !hit_pl_select(set, &rec, ray) \
+		&& !hit_cy_select(set, &rec, ray))
+		set->select->type = CAM;
 }
 
 t_select	*select_object(t_set *set)
@@ -95,9 +108,8 @@ t_select	*select_object(t_set *set)
 	double	v;
 
 	u = (double)set->select->mouse_x / (double)(WIDTH - 1);
-	v = (double)set->select->mouse_y / (double)(HEIGHT - 1);
-	init_camera(set->ele->cam);
-	ray.pos = set->ele->cam->pos;
+	v = (HEIGHT - (double)set->select->mouse_y) / (double)(HEIGHT - 1);
+	fixed_camera(set->ele->cam, &ray);
 	ray.dir = vec3_unit(vec3_sub(vec3_add(vec3_add(set->ele->cam->llc, \
 		vec3_dmul(u, set->ele->cam->hor)), \
 		vec3_dmul(v, set->ele->cam->ver)), \

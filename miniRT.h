@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 16:08:05 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/21 20:07:12 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,13 @@ typedef struct s_set
 	t_img		*img;
 }	t_set;
 
+void	print_manual(void);
+
 void	set_isfront(t_ray *ray, t_hit_record *rec);
 
 void	move_rotate(int keycode, t_set *set);
 
-void	init_camera(t_camera *cam);
+void	fixed_camera(t_camera *cam, t_ray *ray);
 
 void	resize(t_select *select, int flag);
 
