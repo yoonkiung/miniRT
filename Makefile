@@ -33,7 +33,7 @@ LIBC        = ar rc
 
 CC          = gcc
 
-CFLAGS      = -Wall -Wextra -Werror -g3# -fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror# -g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
