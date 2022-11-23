@@ -51,11 +51,11 @@ static bool	hit_circle(const t_cylinder *cy, t_ray *ray, \
 	root = numerator / denominator;
 	if (root < rec->tmin || rec->tmax < root)
 		return (false);
-	if (vec3_length(vec3_sub(rec->pos, center)) - cy->dia / 2 > EPSILON)
-		return (false);
 	rec->t = root;
 	rec->pos = ray_at(ray, root);
 	rec->norm = normal;
+	if (vec3_length(vec3_sub(rec->pos, center)) - cy->dia / 2 > EPSILON)
+		return (false);
 	set_isfront(ray, rec);
 	return (true);
 }
@@ -65,7 +65,11 @@ int	hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
 	t_vec3	uo_c;
 	t_vec3	po_c;
 	t_vec3	cp;
+	t_vec3	temp_norm;
+	t_vec3	temp_pos;
 
+	temp_norm = rec->norm;
+	temp_pos = rec->pos;
 	uo_c = vec3_cross(ray->dir, vec3_unit(cy->norm));
 	po_c = vec3_cross(vec3_sub(ray->pos, cy->pos), vec3_unit(cy->norm));
 	if (!cal_root(vec3_length2(uo_c), vec3_dot(uo_c, po_c),
@@ -74,7 +78,15 @@ int	hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
 	rec->pos = ray_at(ray, rec->t);
 	cp = vec3_sub(rec->pos, cy->pos);
 	if (fabs(vec3_dot(cp, vec3_unit(cy->norm))) > cy->height / 2)
-		return (hit_circle(cy, ray, rec, 1) || hit_circle(cy, ray, rec, -1));
+	{
+		if (!hit_circle(cy, ray, rec, 1) && !hit_circle(cy, ray, rec, -1))
+		{
+			rec->pos = temp_pos;
+			rec->norm = temp_norm;
+			return (0);
+		}
+		return (1);
+	}
 	rec->norm = vec3_unit(vec3_sub(cp, vec3_dmul(
 					vec3_dot(cp, vec3_unit(cy->norm)), vec3_unit(cy->norm))));
 	set_isfront(ray, rec);
