@@ -28,19 +28,19 @@ static void	insert_last(t_plane *temp, t_elements *element)
 	}
 }
 
-static bool	is_vaild(t_elements *ele)
+static bool	is_vaild(t_plane *ele)
 {
-	if (ele->plane->red < 0 || ele->plane->red > 255)
+	if (ele->red < 0 || ele->red > 255)
 		return (false);
-	if (ele->plane->green < 0 || ele->plane->green > 255)
+	if (ele->green < 0 || ele->green > 255)
 		return (false);
-	if (ele->plane->blue < 0 || ele->plane->blue > 255)
+	if (ele->blue < 0 || ele->blue > 255)
 		return (false);
-	if (ele->plane->norm.x < -1 || ele->plane->norm.x > 1)
+	if (ele->norm.x < -1 || ele->norm.x > 1)
 		return (false);
-	if (ele->plane->norm.y < -1 || ele->plane->norm.y > 1)
+	if (ele->norm.y < -1 || ele->norm.y > 1)
 		return (false);
-	if (ele->plane->norm.z < -1 || ele->plane->norm.z > 1)
+	if (ele->norm.z < -1 || ele->norm.z > 1)
 		return (false);
 	return (true);
 }
@@ -75,9 +75,9 @@ int	parse_plane(char **buffer, t_elements *element)
 	rgb = ft_split(buffer[3], ", ");
 	if (split_num(position) != 3 || split_num(norm) != 3 || split_num(rgb) != 3)
 		return (0);
-	if (!is_vaild(element))
-		return (0);
 	put_variable(temp, position, norm, rgb);
+	if (!is_vaild(temp))
+		return (0);
 	insert_last(temp, element);
 	free_char(position);
 	free_char(norm);

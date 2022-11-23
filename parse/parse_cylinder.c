@@ -42,19 +42,19 @@ static void	put_variable(t_cylinder *temp, char **position, \
 	temp->blue = ft_atoi(rgb[2]);
 }
 
-static bool	is_vaild(t_elements *ele)
+static bool	is_vaild(t_cylinder *ele)
 {
-	if (ele->cylinder->red < 0 || ele->cylinder->red > 255)
+	if (ele->red < 0 || ele->red > 255)
 		return (false);
-	if (ele->cylinder->green < 0 || ele->cylinder->green > 255)
+	if (ele->green < 0 || ele->green > 255)
 		return (false);
-	if (ele->cylinder->blue < 0 || ele->cylinder->blue > 255)
+	if (ele->blue < 0 || ele->blue > 255)
 		return (false);
-	if (ele->cylinder->norm.x < -1 || ele->cylinder->norm.x > 1)
+	if (ele->norm.x < -1 || ele->norm.x > 1)
 		return (false);
-	if (ele->cylinder->norm.y < -1 || ele->cylinder->norm.y > 1)
+	if (ele->norm.y < -1 || ele->norm.y > 1)
 		return (false);
-	if (ele->cylinder->norm.z < -1 || ele->cylinder->norm.z > 1)
+	if (ele->norm.z < -1 || ele->norm.z > 1)
 		return (false);
 	return (true);
 }
@@ -78,7 +78,7 @@ int	parse_cylinder(char **buffer, t_elements *element)
 	temp->dia = ft_atof(buffer[3]);
 	temp->height = ft_atof(buffer[4]);
 	temp->next = NULL;
-	if (!is_vaild(element))
+	if (!is_vaild(temp))
 		return (false);
 	insert_last(temp, element);
 	free_char(position);
