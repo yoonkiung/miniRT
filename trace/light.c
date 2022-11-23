@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 15:59:52 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 21:19:12 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 	return (false);
 }
 
-t_vec3	get_specular(t_elements *ele, t_hit_record *rec, t_vec3 light_dir)
-{
-	t_vec3	specular;
-	t_vec3	view_dir;
-	t_vec3	reflect_dir;
-	double	spec;
+// t_vec3	get_specular(t_elements *ele, t_hit_record *rec, t_vec3 light_dir)
+// {
+// 	t_vec3	specular;
+// 	t_vec3	view_dir;
+// 	t_vec3	reflect_dir;
+// 	double	spec;
 
-	view_dir = vec3_unit(vec3_dmul(-1, ele->ray->dir));
-	reflect_dir = reflect(vec3_dmul(-1, light_dir), rec->norm);
-	spec = pow(fmax(vec3_dot(view_dir, reflect_dir), 0.0), 64);
-	specular = vec3_dmul(spec, vec3_dmul(ele->light->ratio, vec3_set(1, 1, 1)));
-	return (specular);
-}
+// 	view_dir = vec3_unit(vec3_dmul(-1, ele->ray->dir));
+// 	reflect_dir = reflect(vec3_dmul(-1, light_dir), rec->norm);
+// 	spec = pow(fmax(vec3_dot(view_dir, reflect_dir), 0.0), 64);
+// 	specular = vec3_dmul(spec, vec3_dmul(ele->light->ratio, vec3_set(1, 1, 1)));
+// 	return (specular);
+// }
 
 t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 {
@@ -58,7 +58,8 @@ t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 	light_ray.dir = vec3_sub(ele->light->pos, rec->pos);
 	if (in_shadow(ele, &light_ray))
 		return (vec3_set(0, 0, 0));
-	return (vec3_add(diffuse, get_specular(ele, rec, light_dir)));
+	// return (vec3_add(diffuse, get_specular(ele, rec, light_dir)));
+	return (diffuse);
 }
 
 t_vec3	phong_light(t_elements *ele, t_hit_record *rec)
@@ -69,6 +70,7 @@ t_vec3	phong_light(t_elements *ele, t_hit_record *rec)
 	rec->albedo = vec3_set(2, 2, 2);
 	ambient = vec3_dmul(ele->amb->ratio, vec3_set((double)ele->amb->red / 255, \
 		(double)ele->amb->green / 255, (double)ele->amb->blue / 255));
+	// ret = vec3_set(ele->red, ele->green, ele->blue);
 	ret = vec3_set(0, 0, 0);
 	ret = vec3_add(ret, point_light(ele, rec));
 	ret = vec3_add(ret, ambient);

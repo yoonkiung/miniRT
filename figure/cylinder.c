@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 19:31:49 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/23 16:35:31 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:26:45 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static bool	hit_circle(const t_cylinder *cy, t_ray *ray, \
 	root = numerator / denominator;
 	if (root < rec->tmin || rec->tmax < root)
 		return (false);
-	if (vec3_length(vec3_sub(rec->pos, center)) - cy->dia / 2 > EPSILON)
-		return (false);
 	rec->t = root;
 	rec->pos = ray_at(ray, root);
 	rec->norm = normal;
+	if (vec3_length(vec3_sub(rec->pos, center)) - cy->dia / 2 > EPSILON)
+		return (false);
 	set_isfront(ray, rec);
 	return (true);
 }
