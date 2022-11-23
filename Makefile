@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/11/21 20:05:59 by daechoi          ###   ########.fr        #
+#    Updated: 2022/11/23 16:33:34 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS        =./main.c \
 				parse/init_mlx.c parse/initalization.c parse/parse_A.c parse/parse_C.c parse/parse_L.c parse/parse_plane.c parse/parse_cylinder.c parse/parse_sphere.c \
 				util/util1.c \
 				figure/plane.c figure/sphere.c figure/cylinder.c \
-				select/move.c select/select.c select/rotate.c select/resize.c \
+				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
 				terminal/manual.c
 
 OBJS        = $(SRCS:.c=.o)

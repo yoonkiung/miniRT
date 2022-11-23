@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 20:07:12 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:45:03 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,14 @@
 
 # define EPSILON 1e-6
 
-typedef struct s_hitten_object
+typedef struct s_img
 {
-	char					type;
-	void 					*elements;
-	struct s_hitten_object	*next;
-}	t_hitten_object;
-
-typedef struct  s_img
-{
-    void    *img_ptr;
-    char    *data;
-    int     size_l;
-    int     bpp;
-    int     endian;
-}   t_img;
+	void	*img_ptr;
+	char	*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}	t_img;
 
 typedef struct s_camera
 {
@@ -145,90 +138,90 @@ typedef struct s_set
 	t_img		*img;
 }	t_set;
 
-void	print_manual(void);
+void		print_manual(void);
 
-void	set_isfront(t_ray *ray, t_hit_record *rec);
+void		set_isfront(t_ray *ray, t_hit_record *rec);
 
-void	move_rotate(int keycode, t_set *set);
+void		move_rotate(int keycode, t_set *set);
 
-void	fixed_camera(t_camera *cam, t_ray *ray);
+void		fixed_camera(t_camera *cam, t_ray *ray);
 
-void	resize(t_select *select, int flag);
+void		resize(t_select *select, int flag);
 
-bool	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec);
+bool		hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec);
 
-bool	hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec);
+bool		hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec);
 
 t_select	*select_object(t_set *set);
 
-void	rotate_y(t_select *select, int flag);
+void		rotate_y(t_select *select, int flag);
 
-void	rotate_z(t_select *select, int flag);
+void		rotate_z(t_select *select, int flag);
 
 t_select	*init_select(t_camera *cam, t_light *light);
 
-void	rotate_x(t_select *select, int flag);
+void		rotate_x(t_select *select, int flag);
 
-void	move_x(t_select *select, int flag);
+void		move_x(t_select *select, int flag);
 
-void	move_y(t_select *select, int flag);
+void		move_y(t_select *select, int flag);
 
-void	move_z(t_select *select, int flag);
+void		move_z(t_select *select, int flag);
 
-t_vec3	phong_light(t_elements *ele, t_hit_record *rec);
+t_vec3		phong_light(t_elements *ele, t_hit_record *rec);
 
-t_vec3	hit(t_elements *ele, t_hit_record *rec, t_ray *ray);
+t_vec3		hit(t_elements *ele, t_hit_record *rec, t_ray *ray);
 
-void	free_char(char **buffer);
+void		free_char(char **buffer);
 
-int		parse_c(char **buffer, t_elements *element);
+int			parse_c(char **buffer, t_elements *element);
 
-int		parse_a(char **buffer, t_elements *element);
+int			parse_a(char **buffer, t_elements *element);
 
-int		parse_l(char **buffer, t_elements *element);
+int			parse_l(char **buffer, t_elements *element);
 
-int		parse_plane(char **buffer, t_elements *element);
+int			parse_plane(char **buffer, t_elements *element);
 
-int		parse_cylinder(char **buffer, t_elements *element);
+int			parse_cylinder(char **buffer, t_elements *element);
 
-int		parse_sphere(char **buffer, t_elements *element);
+int			parse_sphere(char **buffer, t_elements *element);
 
-void	ft_exit(int a);
+void		ft_exit(int a);
 
-int		is_end_rt(char *file);
+int			is_end_rt(char *file);
 
-bool	split_type(char **temp, t_elements *element);
+bool		split_type(char **temp, t_elements *element);
 
-bool	split_newline(int fd, t_elements *element);
+bool		split_newline(int fd, t_elements *element);
 
-void	init_variable(t_elements *element);
+void		init_variable(t_elements *element);
 
-bool	init(int ac, char **av, t_elements *element);
+bool		init(int ac, char **av, t_elements *element);
 
-int		split_num(char **buffer);
+int			split_num(char **buffer);
 
-void	set_mlx(t_set *set, t_elements *ele);
+void		set_mlx(t_set *set, t_elements *ele);
 
-void	drawing(t_set *set);
+void		drawing(t_set *set);
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele);
+void		my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele);
 
-int		exit_game(t_set *set);
+int			exit_game(t_set *set);
 
-void	set_keyhook(t_set *set);
+void		set_keyhook(t_set *set);
 
-void	hit_sp(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+void		hit_sp(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
-void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+void		hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
-void	set_isfront(t_ray *ray, t_hit_record *rec);
+void		set_isfront(t_ray *ray, t_hit_record *rec);
 
-void	hit_cy(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+void		hit_cy(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
-int		hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
+int			hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
 
-double	minf(double a, double b);
+double		minf(double a, double b);
 
-double	maxf(double a, double b);
+double		maxf(double a, double b);
 
 #endif
