@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 21:14:43 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 22:48:25 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,6 @@ double		minf(double a, double b);
 double		maxf(double a, double b);
 int			parse_cone(char **buffer, t_elements *element);
 void		hit_co(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
-void 		free_all(t_elements *ele, t_set *set);
+void		free_all(t_elements *ele, t_set *set);
 
 #endif

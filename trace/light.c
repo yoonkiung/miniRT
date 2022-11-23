@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 21:45:45 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 22:47:59 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 // 	view_dir = vec3_unit(vec3_dmul(-1, ele->ray->dir));
 // 	reflect_dir = reflect(vec3_dmul(-1, light_dir), rec->norm);
 // 	spec = pow(fmax(vec3_dot(view_dir, reflect_dir), 0.0), 64);
-// 	specular = vec3_dmul(spec, vec3_dmul(ele->light->ratio, vec3_set(1, 1, 1)));
+// 	specular = vec3_dmul(spec, vec3_dmul(ele->light->ratio, \
+		vec3_set((double)ele->light->red / 255, \
+// 		(double)ele->light->green / 255, (double)ele->light->blue / 255)));
 // 	return (specular);
 // }
 
@@ -51,8 +53,9 @@ t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 	t_ray	light_ray;
 
 	light_dir = vec3_unit(vec3_sub(ele->light->pos, rec->pos));
-	ratio = fmax(vec3_dot(rec->norm, light_dir), 0.0);
-	diffuse = vec3_dmul(ratio, vec3_set(0.3, 0.3, 0.3));
+	ratio = fmax(vec3_dot(rec->norm, light_dir), 0.05);
+	diffuse = vec3_dmul(ratio, vec3_set((double)ele->light->red / 255, \
+		(double)ele->light->green / 255, (double)ele->light->blue / 255));
 	light_length = vec3_length(vec3_sub(ele->light->pos, rec->pos));
 	light_ray.pos = vec3_add(rec->pos, vec3_dmul(EPSILON, rec->norm));
 	light_ray.dir = vec3_sub(ele->light->pos, rec->pos);
@@ -67,12 +70,12 @@ t_vec3	phong_light(t_elements *ele, t_hit_record *rec)
 	t_vec3	ret;
 	t_vec3	ambient;
 
-	rec->albedo = vec3_set(1, 1, 1);
 	ambient = vec3_dmul(ele->amb->ratio, vec3_set((double)ele->amb->red / 255, \
 		(double)ele->amb->green / 255, (double)ele->amb->blue / 255));
 	ret = vec3_set((double)ele->light->red / 255, \
 		(double)ele->light->green / 255, (double)ele->light->blue / 255);
+	ret = vec3_dmul(0.3, ret);
 	ret = vec3_add(ret, point_light(ele, rec));
 	ret = vec3_add(ret, ambient);
-	return (vec3_min(vec3_mul(ret, rec->albedo), vec3_set(1, 1, 1)));
+	return (vec3_min(vec3_dmul(ele->light->ratio, ret), vec3_set(1, 1, 1)));
 }
