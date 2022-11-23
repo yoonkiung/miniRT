@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:58:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/21 20:12:19 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:42:55 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	ray_color(t_elements *ele)
 	t_hit_record	rec;
 	t_vec3			ret;
 
-	rec.tmin = 1e-6;
+	rec.tmin = EPSILON;
 	rec.tmax = INFINITY;
 	ret = hit(ele, &rec, ele->ray);
 	if (ret.x != -1)
@@ -37,8 +37,8 @@ t_vec3	ray_color(t_elements *ele)
 	else
 	{
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
-		ret = vec3_dmul(255, vec3_add(vec3_dmul( (1.0 - t), vec3_set(1, 1, 1)), \
-                    vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
+		ret = vec3_dmul(255, vec3_add(vec3_dmul((1.0 - t), vec3_set(1, 1, 1)), \
+				vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
 	}
 	return (ret);
 }
@@ -55,7 +55,8 @@ void	fixed_camera(t_camera *cam, t_ray *ray)
 	cam->hor = vec3_set(vp_w, 0, 0);
 	cam->ver = vec3_set(0, vp_h, 0);
 	cam->llc = vec3_set((cam->pos.x - vp_w / 2) \
-		+ cam->norm.x, (cam->pos.y - vp_h / 2) + cam->norm.y, -focal + cam->norm.z);
+		+ cam->norm.x, (cam->pos.y - vp_h / 2) \
+		+ cam->norm.y, -focal + cam->norm.z);
 	ray->pos = cam->pos;
 }
 

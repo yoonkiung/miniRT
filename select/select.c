@@ -6,25 +6,11 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:44:45 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 18:44:51 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:41:52 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
-
-t_select	*init_select(t_camera *cam, t_light *light)
-{
-	t_select	*select;
-
-	select = ft_malloc(sizeof(t_select));
-	select->type = CAM;
-	select->cam = cam;
-	select->light = light;
-	select->sp = NULL;
-	select->pl = NULL;
-	select->cy = NULL;
-	return (select);
-}
 
 bool	hit_sp_select(t_set *set, t_hit_record *rec, t_ray *ray)
 {
@@ -93,7 +79,7 @@ void	ray_select(t_set *set, t_ray *ray)
 {
 	t_hit_record	rec;
 
-	rec.tmin = 0;
+	rec.tmin = EPSILON;
 	rec.tmax = INFINITY;
 	if (!hit_sp_select(set, &rec, ray) \
 		&& !hit_pl_select(set, &rec, ray) \

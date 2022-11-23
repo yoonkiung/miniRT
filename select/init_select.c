@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3_3.c                                        :+:      :+:    :+:   */
+/*   init_select.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 19:59:37 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/23 16:29:15 by daechoi          ###   ########.fr       */
+/*   Created: 2022/11/23 16:32:33 by daechoi           #+#    #+#             */
+/*   Updated: 2022/11/23 16:40:01 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../vector3.h"
+#include "../miniRT.h"
 
-t_vec3	vec3_cross(t_vec3 vec1, t_vec3 vec2)
+t_select	*init_select(t_camera *cam, t_light *light)
 {
-	t_vec3	cross;
+	t_select	*select;
 
-	cross.x = vec1.y * vec2.z - vec1.z * vec2.y;
-	cross.y = vec1.z * vec2.x - vec1.x * vec2.z;
-	cross.z = vec1.x * vec2.y - vec1.y * vec2.x;
-	return (cross);
-}
-
-double	vec3_length2(t_vec3 vec)
-{
-	return (pow(vec.x, 2.0) + pow(vec.y, 2.0) + pow(vec.z, 2.0));
+	select = ft_malloc(sizeof(t_select));
+	select->type = CAM;
+	select->cam = cam;
+	select->light = light;
+	select->sp = NULL;
+	select->pl = NULL;
+	select->cy = NULL;
+	return (select);
 }

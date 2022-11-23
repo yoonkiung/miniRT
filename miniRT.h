@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/21 20:07:12 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 16:45:03 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@
 # define DECREASE 1
 
 # define EPSILON 1e-6
-
-typedef struct s_hitten_object
-{
-	char					type;
-	void					*elements;
-	struct s_hitten_object	*next;
-}	t_hitten_object;
 
 typedef struct s_img
 {
