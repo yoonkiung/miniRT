@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:44:45 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 16:41:52 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/11/23 19:11:24 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,16 @@ bool	hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray)
 void	ray_select(t_set *set, t_ray *ray)
 {
 	t_hit_record	rec;
+	bool			sphit;
+	bool			plhit;
+	bool			cyhit;
 
 	rec.tmin = EPSILON;
 	rec.tmax = INFINITY;
-	if (!hit_sp_select(set, &rec, ray) \
-		&& !hit_pl_select(set, &rec, ray) \
-		&& !hit_cy_select(set, &rec, ray))
+	sphit = hit_sp_select(set, &rec, ray);
+	plhit = hit_pl_select(set, &rec, ray);
+	cyhit = hit_cy_select(set, &rec, ray);
+	if (!sphit && !plhit && !cyhit)
 		set->select->type = CAM;
 }
 
