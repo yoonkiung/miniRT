@@ -185,5 +185,6 @@ double		maxf(double a, double b);
 int			parse_cone(char **buffer, t_elements *element);
 void		hit_co(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 bool		cal_root(double a, double half_b, double c, t_hit_record *rec);
+void 		free_all(t_elements *ele, t_set *set);
 
 #endif

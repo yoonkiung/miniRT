@@ -28,6 +28,17 @@ static void	insert_last(t_sphere *temp, t_elements *element)
 	}
 }
 
+static bool	is_vaild(t_elements *ele)
+{
+	if (ele->sphere->red < 0 || ele->sphere->red > 255)
+		return (false);
+	if (ele->sphere->green < 0 || ele->sphere->green > 255)
+		return (false);
+	if (ele->sphere->blue < 0 || ele->sphere->blue > 255)
+		return (false);
+	return (true);
+}
+
 int	parse_sphere(char **buffer, t_elements *element)
 {
 	t_sphere	*temp;
@@ -49,6 +60,8 @@ int	parse_sphere(char **buffer, t_elements *element)
 	temp->green = ft_atoi(rgb[1]);
 	temp->blue = ft_atoi(rgb[2]);
 	temp->next = NULL;
+	if (!is_vaild(element))
+		return (0);
 	insert_last(temp, element);
 	free_char(position);
 	free_char(rgb);
