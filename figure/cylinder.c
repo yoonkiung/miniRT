@@ -60,6 +60,13 @@ static bool	hit_circle(const t_cylinder *cy, t_ray *ray, \
 	return (true);
 }
 
+int	out_of_cylinder(t_vec3 temp_norm, t_vec3 temp_pos, t_hit_record *rec)
+{
+	rec->pos = temp_pos;
+	rec->norm = temp_norm;
+	return (0);
+}
+
 int	hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
 {
 	t_vec3	uo_c;
@@ -80,11 +87,7 @@ int	hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
 	if (fabs(vec3_dot(cp, vec3_unit(cy->norm))) > cy->height / 2)
 	{
 		if (!hit_circle(cy, ray, rec, 1) && !hit_circle(cy, ray, rec, -1))
-		{
-			rec->pos = temp_pos;
-			rec->norm = temp_norm;
-			return (0);
-		}
+			return (out_of_cylinder(temp_norm, temp_pos, rec));
 		return (1);
 	}
 	rec->norm = vec3_unit(vec3_sub(cp, vec3_dmul(

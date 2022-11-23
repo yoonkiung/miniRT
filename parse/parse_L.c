@@ -32,7 +32,7 @@ int	parse_l(char **buffer, t_elements *element)
 	element->light->ratio = ft_atof(buffer[2]);
 	element->light->red = ft_atoi(rgb[0]);
 	element->light->green = ft_atoi(rgb[1]);
-	element->light->red = ft_atoi(rgb[2]);
+	element->light->blue = ft_atoi(rgb[2]);
 	free_char(position);
 	free_char(rgb);
 	return (1);
