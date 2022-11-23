@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_L.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:56:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/08 13:56:19 by kiyoon           ###   ########.fr       */
+/*   Updated: 2022/11/23 21:35:19 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	parse_l(char **buffer, t_elements *element)
 	element->light->pos.y = ft_atof(position[1]);
 	element->light->pos.z = ft_atof(position[2]);
 	element->light->ratio = ft_atof(buffer[2]);
+	element->light->red = ft_atoi(rgb[0]);
+	element->light->green = ft_atoi(rgb[1]);
+	element->light->blue = ft_atoi(rgb[2]);
 	free_char(position);
 	free_char(rgb);
 	return (1);
