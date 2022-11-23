@@ -23,15 +23,15 @@ typedef struct s_ray
 
 typedef struct s_hit_record
 {
-    t_vec3	pos;
-    t_vec3	norm;
-    double	tmin;
-    double	tmax;
-    double	t;
-    bool	isfront;
+	t_vec3	pos;
+	t_vec3	norm;
+	double	tmin;
+	double	tmax;
+	double	t;
+	bool	isfront;
 	t_vec3	albedo;
 }	t_hit_record;
 
-t_vec3    ray_at(t_ray *ray, double t);
+t_vec3	ray_at(t_ray *ray, double t);
 
 #endif

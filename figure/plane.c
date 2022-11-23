@@ -23,7 +23,7 @@ bool	hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec)
 		return (false);
 		numrator = vec3_dot(vec3_sub(pl->pos, ray->pos), pl->norm);
 	root = numrator / denominator;
-	if (root < rec->tmin || rec->tmax < root) 
+	if (root < rec->tmin || rec->tmax < root)
 		return (false);
 	rec->t = root;
 	rec->pos = ray_at(ray, root);
@@ -47,5 +47,3 @@ void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 		cur = cur->next;
 	}
 }
-
-

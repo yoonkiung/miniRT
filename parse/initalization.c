@@ -78,6 +78,7 @@ void	init_variable(t_elements *element)
 	element->sphere_cnt = 0;
 	element->plane_cnt = 0;
 	element->cylinder_cnt = 0;
+	element->cone_cnt = 0;
 }
 
 bool	init(int ac, char **av, t_elements *element)

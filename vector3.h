@@ -13,9 +13,9 @@
 #ifndef VECTOR3_H
 # define VECTOR3_H
 
-#include <math.h>
-#include "libft/libft.h"
-#include "stdlib.h"
+# include <math.h>
+# include "libft/libft.h"
+# include "stdlib.h"
 
 typedef struct s_vec3
 {

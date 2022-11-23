@@ -1,48 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util1.c                                            :+:      :+:    :+:   */
+/*   util2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 20:22:32 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/07 20:22:34 by kiyoon           ###   ########.fr       */
+/*   Created: 2022/11/22 15:21:08 by kiyoon            #+#    #+#             */
+/*   Updated: 2022/11/22 15:21:08 by kiyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-void	free_char(char **buffer)
+double	minf(double a, double b)
 {
-	int	i;
-
-	i = 0;
-	while (buffer[i])
-	{
-		free(buffer[i]);
-		i++;
-	}
-	free(buffer);
+	if (a > b)
+		return (b);
+	return (a);
 }
 
-void	ft_exit(int a)
+double	maxf(double a, double b)
 {
-	ft_putstr_fd("Error\n", 1);
-	exit(a);
-}
-
-int	split_num(char **buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i])
-		i++;
-	return (i);
-}
-
-int	exit_game(t_set *set)
-{
-	mlx_destroy_window(set->mlx, set->win);
-	exit(0);
+	if (a > b)
+		return (a);
+	return (b);
 }

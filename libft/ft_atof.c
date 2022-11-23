@@ -15,23 +15,24 @@
 double	make_float(char *s, float rez, float fact)
 {
 	int	point_seen;
+	int	d;
 
 	point_seen = 0;
 	while (*s)
 	{
 		if (*s == '.')
 		{
-            point_seen = 1;
-            s++;
-			continue;
-        };
-        int d = *s - '0';
-        if (d >= 0 && d <= 9)
-        {
-            if (point_seen)
+			point_seen = 1;
+			s++;
+			continue ;
+		}
+		d = *s - '0';
+		if (d >= 0 && d <= 9)
+		{
+			if (point_seen)
 				fact /= 10.0;
-            rez = rez * 10.0 + (double)d;
-        }
+			rez = rez * 10.0 + (double)d;
+		}
 		s++;
 	}
 	return (rez * fact);
@@ -60,18 +61,18 @@ int	is_error(char *s)
 	return (1);
 }
 
-double	ft_atof(char* s)
+double	ft_atof(char *s)
 {
-    double	rez;
+	double	rez;
 	double	fact;
 
 	rez = 0;
 	fact = 1;
-    if (*s == '-')
+	if (*s == '-')
 	{
 		s++;
 		fact = -1;
-    }
+	}
 	if (!is_error(s))
 	{
 		ft_putstr_fd("Error\n", 1);

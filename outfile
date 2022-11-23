@@ -1,0 +1,20 @@
+ _____ _____ _____ _____ _____ _____ 
+|  Q  |  W  |  E  |  R  |  T  |  Y  |
+| pos | pos | pos | rot | rot | rot |
+| z++ | y++ | z-- | x++ | y++ | z++ |
+ _____ _____ _____ _____ _____ _____ 
+|  A  |  S  |  D  |  F  |  G  |  H  |
+| pos | pos | pos | rot | rot | rot |
+| x-- | y-- | x++ | x-- | y-- | z-- |
+|_____ _____ _____ _____ _____ _____|
+
+
+ _______ _______ _______              ____________________ 
+|   -   |   +   |   l   |            |      space bar     |
+| size  | size  |select |            |    select camera   |
+|   --  |   ++  | light |            |____________________|
+|_______ _______ _______|            |  mouse left button |
+                                     |    select object   |
+Defualt selected elements is camera. |____________________|
+
+
