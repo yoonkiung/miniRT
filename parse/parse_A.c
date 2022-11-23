@@ -12,6 +12,19 @@
 
 #include "../miniRT.h"
 
+static bool	is_vaild(t_elements *ele)
+{
+	if (ele->amb->ratio < 0 || ele->amb->ratio > 1)
+		return (false);
+	if (ele->amb->red < 0 || ele->amb->red > 255)
+		return (false);
+	if (ele->amb->green < 0 || ele->amb->green > 255)
+		return (false);
+	if (ele->amb->blue < 0 || ele->amb->blue > 255)
+		return (false);
+	return (true);
+}
+
 int	parse_a(char **buffer, t_elements *element)
 {
 	char	**rgb;
@@ -28,6 +41,8 @@ int	parse_a(char **buffer, t_elements *element)
 	element->amb->red = ft_atoi(rgb[0]);
 	element->amb->green = ft_atoi(rgb[1]);
 	element->amb->blue = ft_atoi(rgb[2]);
+	if (!is_vaild(element))
+		return (0);
 	free_char(rgb);
 	return (1);
 }

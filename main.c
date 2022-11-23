@@ -93,5 +93,6 @@ int	main(int ac, char **av)
 	print_manual();
 	mlx_loop(set.mlx);
 	free(set.mlx);
+	free_all(&ele, &set);
 	return (0);
 }
