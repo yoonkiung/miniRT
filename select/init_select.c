@@ -23,5 +23,6 @@ t_select	*init_select(t_camera *cam, t_light *light)
 	select->sp = NULL;
 	select->pl = NULL;
 	select->cy = NULL;
+	select->co = NULL;
 	return (select);
 }

@@ -12,6 +12,8 @@
 
 NAME        = miniRT
 
+NAME_BONUS	= miniRT_bonus
+
 LIBFT       = libft
 
 LIBFT_LIB   = libft.a
@@ -21,11 +23,23 @@ SRCS        =./main.c \
 				trace/ray.c trace/light.c \
 				parse/init_mlx.c parse/initalization.c parse/parse_A.c parse/parse_C.c parse/parse_L.c parse/parse_plane.c parse/parse_cylinder.c parse/parse_sphere.c \
 				util/util1.c util/util2.c\
-				figure/plane.c figure/sphere.c figure/cylinder.c \
+				figure/plane.c figure/sphere.c figure/cylinder.c figure/get_color.c \
 				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
 				terminal/manual.c
 
+SRCS_BONUS	=./main_bonus.c \
+				vector/vector3_1.c vector/vector3_2.c vector/vector3_3.c \
+				trace/ray.c trace/light.c \
+				parse/init_mlx.c parse/initalization.c parse/parse_A.c parse/parse_C.c parse/parse_L.c parse/parse_plane.c parse/parse_cylinder.c parse/parse_sphere.c \
+				util/util1.c util/util2.c\
+				figure/plane.c figure/sphere.c figure/cylinder.c figure/get_color.c \
+				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
+				terminal/manual.c \
+				bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c
+
 OBJS        = $(SRCS:.c=.o)
+
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
 RM          = rm -f
 
@@ -47,12 +61,17 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
+bonus : $(OBJS_BONUS)
+	make all -C $(LIBFT)/
+	mv $(LIBFT)/$(LIBFT_LIB) .
+	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS_BONUS) $(LIBFT_LIB)
+
 fclean : clean
 	$(RM) $(NAME) $(LIBFT_LIB)
 	make fclean -C $(LIBFT)
 
 clean :
-	$(RM) $(OBJS) 
+	$(RM) $(OBJS) $(OBJS_BONUS)
 	make clean -C $(LIBFT)
 
 re : fclean all

@@ -32,6 +32,7 @@
 # define PLANE 2
 # define CYLINDER 3
 # define LIGHT 4
+# define CONE 5
 
 # define INCREASE 0
 # define DECREASE 1
@@ -98,6 +99,18 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_vec3			point;
+	t_vec3			normal;
+	double			theta;
+	double			height;
+	int				red;
+	int				green;
+	int				blue;
+	struct s_cone	*next;
+}	t_cone;
+
 typedef struct s_select
 {
 	int			type;
@@ -105,6 +118,7 @@ typedef struct s_select
 	t_sphere	*sp;
 	t_plane		*pl;
 	t_cylinder	*cy;
+	t_cone		*co;
 	t_light		*light;
 	int			mouse_x;
 	int			mouse_y;
@@ -126,6 +140,7 @@ typedef struct s_elements
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	t_cone		*cone;
 	t_ray		*ray;
 	int			sphere_cnt;
 	int			plane_cnt;
@@ -185,8 +200,14 @@ void		hit_cy(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 int			hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
 double		minf(double a, double b);
 double		maxf(double a, double b);
-int			parse_cone(char **buffer, t_elements *element);
 void		hit_co(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 void		free_all(t_elements *ele, t_set *set);
+bool		cal_root(double a, double half_b, double c, t_hit_record *rec);
+int			mouse_hook(int button, int x, int y, t_set *set);
+bool		hit_sp_select(t_set *set, t_hit_record *rec, t_ray *ray);
+bool		hit_pl_select(t_set *set, t_hit_record *rec, t_ray *ray);
+bool		hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray);
+void		my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele);
+void		fixed_camera(t_camera *cam, t_ray *ray);
 
 #endif

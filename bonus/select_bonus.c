@@ -1,73 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   select.c                                           :+:      :+:    :+:   */
+/*   select_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 18:44:45 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 19:11:24 by daechoi          ###   ########.fr       */
+/*   Created: 2022/12/02 17:05:20 by kiyoon            #+#    #+#             */
+/*   Updated: 2022/12/02 17:05:20 by kiyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../miniRT.h"
+#include "../miniRT_bonus.h"
 
-bool	hit_sp_select(t_set *set, t_hit_record *rec, t_ray *ray)
+bool	hit_co_select(t_set *set, t_hit_record *rec, t_ray *ray)
 {
-	t_sphere	*cur;
-	bool		flag;
-
-	cur = set->ele->sphere;
-	flag = false;
-	while (cur)
-	{
-		if (hit_sphere(cur, ray, rec))
-		{
-			flag = true;
-			set->select->type = SPHERE;
-			set->select->sp = cur;
-			rec->tmax = rec->t;
-		}
-		cur = cur->next;
-	}
-	return (flag);
-}
-
-bool	hit_pl_select(t_set *set, t_hit_record *rec, t_ray *ray)
-{
-	t_plane	*cur;
+	t_cone	*cur;
 	bool	flag;
 
-	cur = set->ele->plane;
+	cur = set->ele->cone;
 	flag = false;
 	while (cur)
 	{
-		if (hit_plane(cur, ray, rec))
+		if (hit_cone(cur, ray, rec))
 		{
 			flag = true;
-			set->select->type = PLANE;
-			set->select->pl = cur;
-			rec->tmax = rec->t;
-		}
-		cur = cur->next;
-	}
-	return (flag);
-}
-
-bool	hit_cy_select(t_set *set, t_hit_record *rec, t_ray *ray)
-{
-	t_cylinder	*cur;
-	bool		flag;
-
-	cur = set->ele->cylinder;
-	flag = false;
-	while (cur)
-	{
-		if (hit_cylinder(cur, ray, rec))
-		{
-			flag = true;
-			set->select->type = CYLINDER;
-			set->select->cy = cur;
+			set->select->type = CONE;
+			set->select->co = cur;
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;
@@ -81,17 +39,18 @@ static void	ray_select(t_set *set, t_ray *ray)
 	bool			sphit;
 	bool			plhit;
 	bool			cyhit;
-
+	bool			cohit;
 	rec.tmin = EPSILON;
 	rec.tmax = INFINITY;
 	sphit = hit_sp_select(set, &rec, ray);
 	plhit = hit_pl_select(set, &rec, ray);
 	cyhit = hit_cy_select(set, &rec, ray);
-	if (!sphit && !plhit && !cyhit)
+	cohit = hit_co_select(set, &rec, ray);
+	if (!sphit && !plhit && !cyhit && !cohit)
 		set->select->type = CAM;
 }
 
-t_select	*select_object(t_set *set)
+t_select	*select_object_bonus(t_set *set)
 {
 	t_ray	ray;
 	double	u;

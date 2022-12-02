@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"minirt_bonus.h": "c",
+		"minirt.h": "c",
+		"string": "c",
+		"vector": "c"
+	}
+}
