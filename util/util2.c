@@ -36,23 +36,23 @@ void	free_list(t_elements *ele)
 	{
 		sphere_temp = ele->sphere;
 		ele->sphere = ele->sphere->next;
-		free(sphere_temp);		
+		free(sphere_temp);
 	}
 	while (ele->cylinder != NULL)
 	{
 		cylinder_temp = ele->cylinder;
 		ele->cylinder = ele->cylinder->next;
-		free(cylinder_temp);		
+		free(cylinder_temp);
 	}
 	while (ele->plane != NULL)
 	{
 		plane_temp = ele->plane;
 		ele->plane = ele->plane->next;
-		free(plane_temp);		
+		free(plane_temp);
 	}
 }
 
-void free_all(t_elements *ele, t_set *set)
+void	free_all(t_elements *ele, t_set *set)
 {
 	free(ele->amb);
 	free(ele->cam);
