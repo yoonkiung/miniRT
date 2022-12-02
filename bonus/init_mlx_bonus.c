@@ -66,4 +66,3 @@ void	drawing_bonus(t_set *set)
 	}
 	mlx_put_image_to_window(set->mlx, set->win, set->img->img_ptr, 0, 0);
 }
-

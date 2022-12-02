@@ -40,6 +40,7 @@ static void	ray_select(t_set *set, t_ray *ray)
 	bool			plhit;
 	bool			cyhit;
 	bool			cohit;
+
 	rec.tmin = EPSILON;
 	rec.tmax = INFINITY;
 	sphit = hit_sp_select(set, &rec, ray);

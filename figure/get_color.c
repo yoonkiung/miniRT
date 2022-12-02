@@ -79,4 +79,3 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, t_elements *ele)
 	dst = img->data + (x * (img->bpp / 8)) + ((HEIGHT - y - 1) * img->size_l);
 	*(unsigned int *)dst = rgb_color;
 }
-
