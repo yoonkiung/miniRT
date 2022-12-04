@@ -22,6 +22,8 @@ void	move_x(t_select *select, int flag)
 		select->pl->pos.x++;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->pos.x++;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->point.x++;
 	else if (select->type == LIGHT && flag == INCREASE)
 		select->light->pos.x++;
 	if (select->type == CAM && flag == DECREASE)
@@ -32,6 +34,8 @@ void	move_x(t_select *select, int flag)
 		select->pl->pos.x--;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->pos.x--;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->point.x--;
 	else if (select->type == LIGHT && flag == DECREASE)
 		select->light->pos.x--;
 }
@@ -46,6 +50,8 @@ void	move_y(t_select *select, int flag)
 		select->pl->pos.y++;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->pos.y++;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->point.y++;
 	else if (select->type == LIGHT && flag == INCREASE)
 		select->light->pos.y++;
 	if (select->type == CAM && flag == DECREASE)
@@ -56,6 +62,8 @@ void	move_y(t_select *select, int flag)
 		select->pl->pos.y--;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->pos.y--;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->point.y--;
 	else if (select->type == LIGHT && flag == DECREASE)
 		select->light->pos.y--;
 }
@@ -70,6 +78,8 @@ void	move_z(t_select *select, int flag)
 		select->pl->pos.z++;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->pos.z++;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->point.z++;
 	else if (select->type == LIGHT && flag == INCREASE)
 		select->light->pos.z++;
 	if (select->type == CAM && flag == DECREASE)
@@ -80,6 +90,8 @@ void	move_z(t_select *select, int flag)
 		select->pl->pos.z--;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->pos.z--;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->point.z--;
 	else if (select->type == LIGHT && flag == DECREASE)
 		select->light->pos.z--;
 }

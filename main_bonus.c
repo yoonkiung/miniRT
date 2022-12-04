@@ -34,7 +34,7 @@ t_vec3	ray_color_bonus(t_elements *ele)
 	rec.tmax = INFINITY;
 	ret = hit_bonus(ele, &rec, ele->ray);
 	if (ret.x != -1)
-		ret = vec3_mul(ret, phong_light(ele, &rec));
+		ret = vec3_mul(ret, phong_light_bonus(ele, &rec));
 	else
 	{
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);

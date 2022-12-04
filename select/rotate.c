@@ -20,12 +20,16 @@ void	rotate_x(t_select *select, int flag)
 		select->pl->norm.x += 0.25;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->norm.x += 0.25;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->normal.x += 0.25;
 	if (select->type == CAM && flag == DECREASE)
 		select->cam->norm.x -= 0.25;
 	else if (select->type == PLANE && flag == DECREASE)
 		select->pl->norm.x -= 0.25;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->norm.x -= 0.25;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->normal.x -= 0.25;
 }
 
 void	rotate_y(t_select *select, int flag)
@@ -36,12 +40,16 @@ void	rotate_y(t_select *select, int flag)
 		select->pl->norm.y += 0.25;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->norm.y += 0.25;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->normal.y += 0.25;
 	if (select->type == CAM && flag == DECREASE)
 		select->cam->norm.y -= 0.25;
 	else if (select->type == PLANE && flag == DECREASE)
 		select->pl->norm.y -= 0.25;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->norm.y -= 0.25;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->normal.y -= 0.25;
 }
 
 void	rotate_z(t_select *select, int flag)
@@ -52,10 +60,14 @@ void	rotate_z(t_select *select, int flag)
 		select->pl->norm.z += 0.25;
 	else if (select->type == CYLINDER && flag == INCREASE)
 		select->cy->norm.z += 0.25;
+	else if (select->type == CONE && flag == INCREASE)
+		select->co->normal.z += 0.25;
 	if (select->type == CAM && flag == DECREASE)
 		select->cam->norm.z -= 0.25;
 	else if (select->type == PLANE && flag == DECREASE)
 		select->pl->norm.z -= 0.25;
 	else if (select->type == CYLINDER && flag == DECREASE)
 		select->cy->norm.z -= 0.25;
+	else if (select->type == CONE && flag == DECREASE)
+		select->co->normal.z -= 0.25;
 }

@@ -74,7 +74,7 @@ int	parse_cone(char **buffer, t_elements *element)
 	if (split_num(position) != 3 || split_num(norm) != 3 || split_num(rgb) != 3)
 		return (0);
 	put_variable(temp, position, norm, rgb);
-	temp->theta = ft_atof(buffer[3]);
+	temp->theta = ft_atof(buffer[3]) / 180 * 3.14;
 	temp->height = ft_atof(buffer[4]);
 	temp->next = NULL;
 	if (!is_vaild(temp))

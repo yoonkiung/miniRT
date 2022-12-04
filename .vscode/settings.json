@@ -3,6 +3,7 @@
 		"minirt_bonus.h": "c",
 		"minirt.h": "c",
 		"string": "c",
-		"vector": "c"
+		"vector": "c",
+		"complex": "c"
 	}
 }

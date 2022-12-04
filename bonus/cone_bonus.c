@@ -12,16 +12,53 @@
 
 #include "../miniRT_bonus.h"
 
+bool	hit_circle_cone(t_cone *co, t_ray *ray, t_hit_record *rec)
+{
+	double	denominator;
+	double	numerator;
+	double	root;
+	t_vec3	normal;
+	t_vec3	center;
+
+	normal = vec3_unit(co->normal);
+	center = vec3_add(co->point, vec3_dmul(co->height, normal));
+	denominator = vec3_dot(normal, ray->dir);
+	if (fabs(denominator) < EPSILON)
+		return (false);
+	numerator = vec3_dot(vec3_sub(center, ray->pos), normal);
+	root = numerator / denominator;
+	if (root < rec->tmin || rec->tmax < root)
+		return (false);
+	rec->t = root;
+	rec->pos = ray_at(ray, root);
+	rec->norm = normal;
+	if (vec3_length(vec3_sub(rec->pos, center)) - co->height * tan(co->theta) > EPSILON)
+		return (false);
+	set_isfront(ray, rec);
+	return (true);
+}
+
+int	out_of_cone(t_vec3 temp_norm, t_vec3 temp_pos, t_hit_record *rec)
+{
+	rec->pos = temp_pos;
+	rec->norm = temp_norm;
+	return (0);
+}
+
 int	hit_cone(t_cone *co, t_ray *ray, t_hit_record *rec)
 {
 	t_vec3	ce;
 	double	dv;
 	double	ce_v;
 	double	cp_len;
+	t_vec3	temp_norm;
+	t_vec3	temp_pos;
 
+	temp_norm = rec->norm;
+	temp_pos = rec->pos;
 	ce = vec3_sub(ray->pos, co->point);
-	dv = vec3_dot(ray->dir, co->normal);
-	ce_v = vec3_dot(ce, co->normal);
+	dv = vec3_dot(ray->dir, vec3_unit(co->normal));
+	ce_v = vec3_dot(ce, vec3_unit(co->normal));
 	if (!cal_root(dv * dv - pow(cos(co->theta), 2),
 			dv * ce_v - vec3_dot(ce, ray->dir) * pow(cos(co->theta), 2),
 			ce_v * ce_v - vec3_dot(ce, ce) * pow(cos(co->theta), 2),
@@ -29,7 +66,21 @@ int	hit_cone(t_cone *co, t_ray *ray, t_hit_record *rec)
 		return (0);
 	rec->pos = ray_at(ray, rec->t);
 	cp_len = vec3_length(vec3_sub(rec->pos, co->point));
-	//아직 미완성
+	if (vec3_dot(vec3_sub(rec->pos, co->point), vec3_unit(co->normal)) < 0)
+	{
+		rec->norm = temp_norm;
+		rec->pos = temp_pos;
+		return (0);
+	}
+	if (cp_len * cos(co->theta) > co->height)
+	{
+		if (!hit_circle_cone(co, ray, rec))
+			return (out_of_cone(temp_norm, temp_pos, rec));
+		return (1);
+	}
+	rec->norm = vec3_unit(vec3_sub(rec->pos, vec3_add(co->point, \
+		vec3_dmul(cp_len * acos(co->theta), vec3_unit(co->normal)))));
+	set_isfront(ray, rec);
 	return (1);
 }
 

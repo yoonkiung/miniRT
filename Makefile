@@ -47,7 +47,7 @@ LIBC        = ar rc
 
 CC          = gcc
 
-CFLAGS      = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
@@ -64,10 +64,10 @@ all : $(NAME)
 bonus : $(OBJS_BONUS)
 	make all -C $(LIBFT)/
 	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS_BONUS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(MLX) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT_LIB)
 
 fclean : clean
-	$(RM) $(NAME) $(LIBFT_LIB)
+	$(RM) $(NAME) $(NAME_BONUS) $(LIBFT_LIB)
 	make fclean -C $(LIBFT)
 
 clean :
