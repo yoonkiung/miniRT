@@ -4,6 +4,7 @@
 		"minirt.h": "c",
 		"string": "c",
 		"vector": "c",
-		"complex": "c"
+		"complex": "c",
+		"libft.h": "c"
 	}
 }

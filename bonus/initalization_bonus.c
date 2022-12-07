@@ -12,7 +12,7 @@
 
 #include "../miniRT_bonus.h"
 
-bool	split_type_bonus(char **temp, t_elements *element)
+bool	split_type_bonus(char **temp, t_elements *element, t_set *set)
 {
 	if (ft_strcmp(temp[0], "A") == 0)
 		return (parse_a(temp, element));
@@ -21,7 +21,7 @@ bool	split_type_bonus(char **temp, t_elements *element)
 	else if (ft_strcmp(temp[0], "L") == 0)
 		return (parse_l_bonus(temp, element));
 	else if (ft_strcmp(temp[0], "sp") == 0)
-		return (parse_sphere(temp, element));
+		return (parse_sphere_bonus(temp, element, set));
 	else if (ft_strcmp(temp[0], "pl") == 0)
 		return (parse_plane(temp, element));
 	else if (ft_strcmp(temp[0], "cy") == 0)
@@ -33,7 +33,7 @@ bool	split_type_bonus(char **temp, t_elements *element)
 	return (true);
 }
 
-bool	split_newline_bonus(int fd, t_elements *element)
+bool	split_newline_bonus(int fd, t_elements *element, t_set *set)
 {
 	char	*line;
 	char	**temp;
@@ -44,7 +44,7 @@ bool	split_newline_bonus(int fd, t_elements *element)
 		if (ft_strcmp(line, "") != 0)
 		{
 			temp = ft_split(line, " ");
-			if (!split_type_bonus(temp, element))
+			if (!split_type_bonus(temp, element, set))
 				return (false);
 			free_char(temp);
 		}
@@ -71,7 +71,7 @@ void	init_variable_bonus(t_elements *element)
 	element->cone_cnt = 0;
 }
 
-bool	init_bonus(int ac, char **av, t_elements *element)
+bool	init_bonus(int ac, char **av, t_elements *element, t_set *set)
 {
 	int	fd;
 
@@ -81,7 +81,7 @@ bool	init_bonus(int ac, char **av, t_elements *element)
 	fd = is_end_rt(av[1]);
 	if (!fd)
 		return (false);
-	if (!split_newline_bonus(fd, element))
+	if (!split_newline_bonus(fd, element, set))
 		return (false);
 	element->ray = ft_malloc(sizeof(t_ray));
 	return (true);

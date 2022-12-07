@@ -33,7 +33,7 @@ SRCS_BONUS	=./main_bonus.c \
 				figure/plane.c figure/sphere.c figure/cylinder.c figure/get_color.c \
 				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
 				terminal/manual.c \
-				bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c bonus/parse_L_bonus.c
+				bonus/sphere_bonus.c bonus/parse_sphere_bonus.c bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c bonus/parse_L_bonus.c bonus/free_bonus.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -57,6 +57,7 @@ endif
 
 $(NAME) : $(OBJ)
 	make all -C $(LIBFT)/
+	make all -C mlx/
 	mv $(LIBFT)/$(LIBFT_LIB) .
 	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJ) $(LIBFT_LIB)
 
@@ -75,6 +76,7 @@ fclean : clean
 clean :
 	$(RM) $(OBJS) $(OBJS_BONUS)
 	make clean -C $(LIBFT)
+	make clean -C mlx/
 
 re : fclean all
 

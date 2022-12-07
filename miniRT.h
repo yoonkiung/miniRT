@@ -24,8 +24,8 @@
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17
-# define WIDTH	400
-# define HEIGHT 300
+# define WIDTH	1600
+# define HEIGHT 900
 
 # define CAM 0
 # define SPHERE 1
@@ -68,6 +68,17 @@ typedef struct s_light
 	struct s_light	*next;
 }	t_light;
 
+typedef struct s_xpm
+{
+	char			*img;
+	int				img_w;
+	int				img_h;
+	unsigned char	*addr;
+	int				line_length;
+	int				bits_per_pixel;
+	int				endian;
+}	t_xpm;
+
 typedef struct s_sphere
 {
 	t_vec3			pos;
@@ -75,6 +86,8 @@ typedef struct s_sphere
 	int				red;
 	int				green;
 	int				blue;
+	t_xpm			texture;
+	t_xpm			bump;
 	struct s_sphere	*next;
 }	t_sphere;
 
