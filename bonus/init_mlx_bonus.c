@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:30:37 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/02 15:30:38 by kiyoon           ###   ########.fr       */
+/*   Updated: 2022/12/05 21:16:13 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	mouse_hook_bonus(int button, int x, int y, t_set *set)
 	return (0);
 }
 
+void	set_light(t_set *set)
+{
+	if (set->select->light->next)
+		set->select->light = set->select->light->next;
+	else
+		set->select->light = set->ele->light;
+}
+
 int	key_hook_bonus(int keycode, t_set *set)
 {
 	move_rotate(keycode, set);
@@ -34,7 +42,10 @@ int	key_hook_bonus(int keycode, t_set *set)
 	else if (keycode == 49)
 		set->select->type = CAM;
 	else if (keycode == 37)
+	{
 		set->select->type = LIGHT;
+		set_light(set);
+	}
 	else if (keycode == 24)
 		resize(set->select, INCREASE);
 	else if (keycode == 27)

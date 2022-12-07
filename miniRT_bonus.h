@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:21 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/02 15:37:22 by kiyoon           ###   ########.fr       */
+/*   Updated: 2022/12/05 17:00:49 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void		set_keyhook_bonus(t_set *set);
 t_select	*select_object_bonus(t_set *set);
 int			hit_cone(t_cone *co, t_ray *ray, t_hit_record *rec);
 t_vec3		phong_light_bonus(t_elements *ele, t_hit_record *rec);
+int			parse_l_bonus(char **buffer, t_elements *element);
 
 #endif

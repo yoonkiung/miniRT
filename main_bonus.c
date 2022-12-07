@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/02 15:25:46 by kiyoon           ###   ########.fr       */
+/*   Updated: 2022/12/05 19:39:27 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ int	main(int ac, char **av)
 
 	if (!init_bonus(ac, av, &ele))
 		ft_exit(1);
+	ele.light->next = malloc(sizeof(t_light));
+	ele.light->next->pos = vec3_set(5, 10, 0);
+	ele.light->next->ratio = 0.7;
+	ele.light->next->red = 255;
+	ele.light->next->green = 254;
+	ele.light->next->blue = 254;
+	ele.light->next->next = NULL;
 	set_mlx(&set, &ele);
 	drawing_bonus(&set);
 	set_keyhook_bonus(&set);

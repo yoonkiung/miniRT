@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 22:48:25 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/05 17:24:27 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_vec3	pos;
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
+	t_vec3			pos;
+	double			ratio;
+	int				red;
+	int				green;
+	int				blue;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_sphere

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_L.c                                          :+:      :+:    :+:   */
+/*   parse_L_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:56:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/05 16:57:13 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/05 17:16:50 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-int	parse_l(char **buffer, t_elements *element)
+int	parse_l_bonus(char **buffer, t_elements *element)
 {
 	char	**position;
 	char	**rgb;

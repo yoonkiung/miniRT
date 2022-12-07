@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:10:03 by daechoi           #+#    #+#             */
-/*   Updated: 2022/11/23 22:47:59 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/05 21:35:47 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@ bool	in_shadow(t_elements *ele, t_ray *light_ray)
 	return (false);
 }
 
-t_vec3	get_specular(t_elements *ele, t_hit_record *rec, t_vec3 light_dir)
-{
-	t_vec3	specular;
-	t_vec3	view_dir;
-	t_vec3	reflect_dir;
-	double	spec;
-
-	view_dir = vec3_unit(vec3_dmul(-1, ele->ray->dir));
-	reflect_dir = reflect(vec3_dmul(-1, light_dir), rec->norm);
-	spec = pow(fmax(vec3_dot(view_dir, reflect_dir), 0.0), 64);
-	specular = vec3_dmul(spec, vec3_dmul(ele->light->ratio, \
-		vec3_set((double)ele->light->red / 255, \
-		(double)ele->light->green / 255, (double)ele->light->blue / 255)));
-	return (specular);
-}
-
 t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 {
 	t_vec3	diffuse;
@@ -61,7 +45,6 @@ t_vec3	point_light(t_elements *ele, t_hit_record *rec)
 	light_ray.dir = vec3_sub(ele->light->pos, rec->pos);
 	if (in_shadow(ele, &light_ray))
 		return (vec3_set(0, 0, 0));
-	return (vec3_add(diffuse, get_specular(ele, rec, light_dir)));
 	return (diffuse);
 }
 
