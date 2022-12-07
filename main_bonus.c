@@ -37,6 +37,7 @@ t_vec3	ray_color_bonus(t_elements *ele)
 		ret = vec3_mul(ret, phong_light_bonus(ele, &rec));
 	else
 	{
+		ret = vec3_set(0, 0, 0);
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
 		ret = vec3_dmul(255, vec3_add(vec3_dmul((1.0 - t), vec3_set(1, 1, 1)), \
 				vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));

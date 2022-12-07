@@ -47,9 +47,9 @@ static void	insert_last(t_cone *temp, t_elements *element)
 static void	put_variable(t_cone *temp, char **position, \
 					char **norm, char **rgb)
 {
-	temp->point.x = ft_atof(position[0]);
-	temp->point.y = ft_atof(position[1]);
-	temp->point.z = ft_atof(position[2]);
+	temp->pos.x = ft_atof(position[0]);
+	temp->pos.y = ft_atof(position[1]);
+	temp->pos.z = ft_atof(position[2]);
 	temp->normal.x = ft_atof(norm[0]);
 	temp->normal.y = ft_atof(norm[1]);
 	temp->normal.z = ft_atof(norm[2]);
@@ -74,7 +74,7 @@ int	parse_cone(char **buffer, t_elements *element)
 	if (split_num(position) != 3 || split_num(norm) != 3 || split_num(rgb) != 3)
 		return (0);
 	put_variable(temp, position, norm, rgb);
-	temp->theta = ft_atof(buffer[3]) / 180 * 3.14;
+	temp->theta = ft_atof(buffer[3]) * M_PI / 180;
 	temp->height = ft_atof(buffer[4]);
 	temp->next = NULL;
 	if (!is_vaild(temp))

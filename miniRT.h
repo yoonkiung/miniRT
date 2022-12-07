@@ -101,7 +101,7 @@ typedef struct s_cylinder
 
 typedef struct s_cone
 {
-	t_vec3			point;
+	t_vec3			pos;
 	t_vec3			normal;
 	double			theta;
 	double			height;

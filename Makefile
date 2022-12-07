@@ -12,8 +12,6 @@
 
 NAME        = miniRT
 
-NAME_BONUS	= miniRT_bonus
-
 LIBFT       = libft
 
 LIBFT_LIB   = libft.a
@@ -51,23 +49,27 @@ CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
-$(NAME) : $(OBJS)
+ifdef WITH_BONUS
+	OBJ = $(OBJS_BONUS)
+else
+	OBJ = $(OBJS)
+endif
+
+$(NAME) : $(OBJ)
 	make all -C $(LIBFT)/
 	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJ) $(LIBFT_LIB)
 
 .c.o: $(SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
-bonus : $(OBJS_BONUS)
-	make all -C $(LIBFT)/
-	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) $(MLX) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT_LIB)
+bonus :
+	make WITH_BONUS=1 all
 
 fclean : clean
-	$(RM) $(NAME) $(NAME_BONUS) $(LIBFT_LIB)
+	$(RM) $(NAME) $(LIBFT_LIB)
 	make fclean -C $(LIBFT)
 
 clean :
