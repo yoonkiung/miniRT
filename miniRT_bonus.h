@@ -27,5 +27,6 @@ void		set_keyhook_bonus(t_set *set);
 t_select	*select_object_bonus(t_set *set);
 int			hit_cone(t_cone *co, t_ray *ray, t_hit_record *rec);
 t_vec3		phong_light_bonus(t_elements *ele, t_hit_record *rec);
+int			parse_l_bonus(char **buffer, t_elements *element);
 
 #endif

@@ -19,7 +19,7 @@ bool	split_type_bonus(char **temp, t_elements *element)
 	else if (ft_strcmp(temp[0], "C") == 0)
 		return (parse_c(temp, element));
 	else if (ft_strcmp(temp[0], "L") == 0)
-		return (parse_l(temp, element));
+		return (parse_l_bonus(temp, element));
 	else if (ft_strcmp(temp[0], "sp") == 0)
 		return (parse_sphere(temp, element));
 	else if (ft_strcmp(temp[0], "pl") == 0)

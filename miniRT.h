@@ -60,11 +60,12 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_vec3	pos;
-	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
+	t_vec3			pos;
+	double			ratio;
+	int				red;
+	int				green;
+	int				blue;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_sphere

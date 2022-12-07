@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_L.c                                          :+:      :+:    :+:   */
+/*   parse_L_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kiyoon <kiyoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 13:56:18 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/23 21:35:19 by daechoi          ###   ########.fr       */
+/*   Created: 2022/12/07 17:33:33 by kiyoon            #+#    #+#             */
+/*   Updated: 2022/12/07 17:33:34 by kiyoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../miniRT.h"
+#include "../miniRT_bonus.h"
 
-int	parse_l(char **buffer, t_elements *element)
+t_light	*find_cur(t_elements *element)
+{
+	t_light	*cur;
+
+	cur = element->light;
+	while (cur != NULL)
+		cur = cur->next;
+	cur = ft_malloc(sizeof(t_light));
+	return (cur);
+}
+
+int	parse_l_bonus(char **buffer, t_elements *element)
 {
 	char	**position;
 	char	**rgb;
+	t_light	*cur;
 
 	if (element->light)
 		return (0);
@@ -25,15 +37,15 @@ int	parse_l(char **buffer, t_elements *element)
 	rgb = ft_split(buffer[3], ", ");
 	if (split_num(rgb) != 3 || split_num(position) != 3)
 		return (0);
-	element->light = ft_malloc(sizeof(t_light));
-	element->light->pos.x = ft_atof(position[0]);
-	element->light->pos.y = ft_atof(position[1]);
-	element->light->pos.z = ft_atof(position[2]);
-	element->light->ratio = ft_atof(buffer[2]);
-	element->light->red = ft_atoi(rgb[0]);
-	element->light->green = ft_atoi(rgb[1]);
-	element->light->blue = ft_atoi(rgb[2]);
-	element->light->next = NULL;
+	cur = find_cur(element);
+	cur->pos.x = ft_atof(position[0]);
+	cur->pos.y = ft_atof(position[1]);
+	cur->pos.z = ft_atof(position[2]);
+	cur->ratio = ft_atof(buffer[2]);
+	cur->red = ft_atoi(rgb[0]);
+	cur->green = ft_atoi(rgb[1]);
+	cur->blue = ft_atoi(rgb[2]);
+	cur->next = NULL;
 	free_char(position);
 	free_char(rgb);
 	return (1);
