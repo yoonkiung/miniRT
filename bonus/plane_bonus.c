@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   plane_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:55:05 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/07 20:07:07 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 22:39:35 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-bool	hit_plane(t_plane *pl, t_ray *ray, t_hit_record *rec)
+t_vec3	uv_mapping(t_plane *plane, t_hit_record *rec)
 {
-	double	numrator;
-	double	denominator;
-	double	root;
+	t_vec3	unorm;
+	t_vec3	vnorm;
+	double	u;
+	double	v;
 
-	denominator = vec3_dot(ray->dir, pl->norm);
-	if (fabs(denominator) < EPSILON)
-		return (false);
-		numrator = vec3_dot(vec3_sub(pl->pos, ray->pos), pl->norm);
-	root = numrator / denominator;
-	if (root < rec->tmin || rec->tmax < root)
-		return (false);
-	rec->t = root;
-	rec->pos = ray_at(ray, root);
-	rec->norm = pl->norm;
-	set_isfront(ray, rec);
-	return (true);
+	unorm = vec3_cross(plane->norm, vec3_set(1, 0, 0));
+	vnorm = vec3_cross(plane->norm, unorm);
+	u = fmod(vec3_dot(rec->pos, unorm), 1);
+	v = fmod(vec3_dot(rec->pos, vnorm), 1);
+	if ((int)(round(u * 2) + round(v * 2)) % 2 == 0)
+		return (vec3_set(255, 255, 255));
+	return (vec3_set(50, 50, 50));
 }
 
-void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
+void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 {
 	t_plane	*cur;
 
@@ -41,7 +37,10 @@ void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 	{
 		if (hit_plane(cur, ray, rec))
 		{
-			*ret = vec3_set(cur->red, cur->green, cur->blue);
+			if (cur->ischeck)
+				*ret = uv_mapping(cur, rec);
+			else
+				*ret = vec3_set(cur->red, cur->green, cur->blue);
 			rec->tmax = rec->t;
 		}
 		cur = cur->next;

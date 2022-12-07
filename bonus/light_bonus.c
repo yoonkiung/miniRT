@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:16:01 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/05 21:37:13 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 22:31:23 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_vec3	reflect_bonus(t_vec3 v, t_vec3 n)
 	return (vec3_sub(v, vec3_dmul(vec3_dot(v, n) * 2, n)));
 }
 
-bool	in_shadow_bonus(t_elements *ele, t_ray *light_ray)
+bool	in_shadow_bonus(t_elements *ele, t_ray *light_ray, double light_length)
 {
 	t_hit_record	rec;
 
-	rec.tmin = 0;
-	rec.tmax = INFINITY;
+	rec.tmin = EPSILON;
+	rec.tmax = light_length;
 	if (hit_bonus(ele, &rec, light_ray).x != -1)
 		return (true);
 	return (false);
@@ -57,10 +57,10 @@ t_vec3	point_light_bonus(t_elements *ele, t_hit_record *rec, t_light *lights)
 	ratio = fmax(vec3_dot(rec->norm, light_dir), 0.05);
 	diffuse = vec3_dmul(ratio, vec3_set((double)lights->red / 255, \
 		(double)lights->green / 255, (double)lights->blue / 255));
-	light_length = vec3_length(vec3_sub(lights->pos, rec->pos));
+	light_length = vec3_length(light_dir);
 	light_ray.pos = vec3_add(rec->pos, vec3_dmul(EPSILON, rec->norm));
 	light_ray.dir = vec3_sub(lights->pos, rec->pos);
-	if (in_shadow_bonus(ele, &light_ray))
+	if (in_shadow_bonus(ele, &light_ray, light_length))
 		return (vec3_set(0, 0, 0));
 	return (vec3_add(diffuse, get_specular_bonus(ele, rec, light_dir, lights)));
 }

@@ -6,7 +6,7 @@
 #    By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 15:04:45 by kiyoon            #+#    #+#              #
-#    Updated: 2022/12/05 17:38:40 by daechoi          ###   ########.fr        #
+#    Updated: 2022/12/07 18:18:17 by daechoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS_BONUS	=./main_bonus.c \
 				figure/plane.c figure/sphere.c figure/cylinder.c figure/get_color.c \
 				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
 				terminal/manual.c \
-				bonus/sphere_bonus.c bonus/parse_sphere_bonus.c bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c bonus/parse_L_bonus.c bonus/free_bonus.c
+				bonus/plane_bonus.c bonus/sphere_bonus.c bonus/parse_sphere_bonus.c bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c bonus/parse_L_bonus.c bonus/free_bonus.c
 
 OBJS        = $(SRCS:.c=.o)
 

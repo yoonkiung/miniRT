@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/12/05 17:24:27 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 23:09:33 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define X_EVENT_KEYPRESS		2
 # define X_EVENT_DESTROYNOTIFY	17
-# define WIDTH	1600
-# define HEIGHT 900
+# define WIDTH	800
+# define HEIGHT 600
 
 # define CAM 0
 # define SPHERE 1
@@ -99,6 +99,7 @@ typedef struct s_plane
 	int				green;
 	int				blue;
 	struct s_plane	*next;
+	bool			ischeck;
 }	t_plane;
 
 typedef struct s_cylinder
