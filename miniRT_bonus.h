@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:37:21 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/05 17:00:49 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 18:27:16 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_select	*select_object_bonus(t_set *set);
 int			hit_cone(t_cone *co, t_ray *ray, t_hit_record *rec);
 t_vec3		phong_light_bonus(t_elements *ele, t_hit_record *rec);
 int			parse_l_bonus(char **buffer, t_elements *element);
+void		hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
 
 #endif

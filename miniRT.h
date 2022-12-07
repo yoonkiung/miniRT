@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/12/05 17:24:27 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 23:09:33 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_plane
 	int				green;
 	int				blue;
 	struct s_plane	*next;
+	bool			ischeck;
 }	t_plane;
 
 typedef struct s_cylinder

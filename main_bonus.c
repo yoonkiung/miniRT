@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/07 17:42:53 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:46:10 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vec3	hit_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray)
 
 	ret = vec3_set(-1, -1, -1);
 	hit_sp(ele, rec, ray, &ret);
-	hit_pl(ele, rec, ray, &ret);
+	hit_pl_bonus(ele, rec, ray, &ret);
 	hit_cy(ele, rec, ray, &ret);
 	hit_co(ele, rec, ray, &ret);
 	return (ret);
@@ -72,13 +72,8 @@ int	main(int ac, char **av)
 
 	if (!init_bonus(ac, av, &ele))
 		ft_exit(1);
-	// ele.light->next = malloc(sizeof(t_light));
-	// ele.light->next->pos = vec3_set(5, 10, 0);
-	// ele.light->next->ratio = 0.7;
-	// ele.light->next->red = 255;
-	// ele.light->next->green = 254;
-	// ele.light->next->blue = 254;
-	// ele.light->next->next = NULL;
+	if (ele.plane)
+		ele.plane->ischeck = 1;
 	set_mlx(&set, &ele);
 	drawing_bonus(&set);
 	set_keyhook_bonus(&set);
