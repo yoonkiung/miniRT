@@ -33,6 +33,7 @@ int	parse_l(char **buffer, t_elements *element)
 	element->light->red = ft_atoi(rgb[0]);
 	element->light->green = ft_atoi(rgb[1]);
 	element->light->blue = ft_atoi(rgb[2]);
+	element->light->next = NULL;
 	free_char(position);
 	free_char(rgb);
 	return (1);

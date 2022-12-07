@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/05 19:39:27 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:42:53 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_vec3	ray_color_bonus(t_elements *ele)
 		ret = vec3_mul(ret, phong_light_bonus(ele, &rec));
 	else
 	{
+		ret = vec3_set(0, 0, 0);
 		t = 0.5 * (vec3_unit(ele->ray->dir).y + 1.0);
 		ret = vec3_dmul(255, vec3_add(vec3_dmul((1.0 - t), vec3_set(1, 1, 1)), \
 				vec3_dmul(t, vec3_set(0.5, 0.7, 1.0))));
@@ -71,13 +72,13 @@ int	main(int ac, char **av)
 
 	if (!init_bonus(ac, av, &ele))
 		ft_exit(1);
-	ele.light->next = malloc(sizeof(t_light));
-	ele.light->next->pos = vec3_set(5, 10, 0);
-	ele.light->next->ratio = 0.7;
-	ele.light->next->red = 255;
-	ele.light->next->green = 254;
-	ele.light->next->blue = 254;
-	ele.light->next->next = NULL;
+	// ele.light->next = malloc(sizeof(t_light));
+	// ele.light->next->pos = vec3_set(5, 10, 0);
+	// ele.light->next->ratio = 0.7;
+	// ele.light->next->red = 255;
+	// ele.light->next->green = 254;
+	// ele.light->next->blue = 254;
+	// ele.light->next->next = NULL;
 	set_mlx(&set, &ele);
 	drawing_bonus(&set);
 	set_keyhook_bonus(&set);

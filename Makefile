@@ -12,8 +12,6 @@
 
 NAME        = miniRT
 
-NAME_BONUS	= miniRT_bonus
-
 LIBFT       = libft
 
 LIBFT_LIB   = libft.a
@@ -35,7 +33,7 @@ SRCS_BONUS	=./main_bonus.c \
 				figure/plane.c figure/sphere.c figure/cylinder.c figure/get_color.c \
 				select/move.c select/select.c select/rotate.c select/resize.c select/init_select.c \
 				terminal/manual.c \
-				bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c
+				bonus/init_mlx_bonus.c bonus/cone_bonus.c bonus/initalization_bonus.c bonus/parse_cone_bonus.c bonus/select_bonus.c bonus/light_bonus.c bonus/parse_L_bonus.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -51,23 +49,27 @@ CFLAGS      = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 MLX			= -L./mlx -lmlx -framework OpenGL -framework AppKit
 
-$(NAME) : $(OBJS)
+ifdef WITH_BONUS
+	OBJ = $(OBJS_BONUS)
+else
+	OBJ = $(OBJS)
+endif
+
+$(NAME) : $(OBJ)
 	make all -C $(LIBFT)/
 	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(MLX) -o $(NAME) $(OBJ) $(LIBFT_LIB)
 
 .c.o: $(SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
-bonus : $(OBJS_BONUS)
-	make all -C $(LIBFT)/
-	mv $(LIBFT)/$(LIBFT_LIB) .
-	$(CC) $(CFLAGS) $(MLX) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT_LIB)
+bonus :
+	make WITH_BONUS=1 all
 
 fclean : clean
-	$(RM) $(NAME) $(NAME_BONUS) $(LIBFT_LIB)
+	$(RM) $(NAME) $(LIBFT_LIB)
 	make fclean -C $(LIBFT)
 
 clean :
