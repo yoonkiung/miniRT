@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:55:05 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/05 21:50:42 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/07 18:01:40 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 	{
 		if (hit_plane(cur, ray, rec))
 		{
-			printf("%f %f %f\n", rec->pos.x, rec->pos.y, rec->pos.z);
 			*ret = vec3_set(cur->red, cur->green, cur->blue);
 			rec->tmax = rec->t;
 		}

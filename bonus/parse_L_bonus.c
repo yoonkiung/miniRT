@@ -29,8 +29,6 @@ int	parse_l_bonus(char **buffer, t_elements *element)
 	char	**rgb;
 	t_light	*cur;
 
-	if (element->light)
-		return (0);
 	if (split_num(buffer) != 4)
 		return (0);
 	position = ft_split(buffer[1], ", ");
@@ -46,6 +44,7 @@ int	parse_l_bonus(char **buffer, t_elements *element)
 	cur->green = ft_atoi(rgb[1]);
 	cur->blue = ft_atoi(rgb[2]);
 	cur->next = NULL;
+	element->light = cur;
 	free_char(position);
 	free_char(rgb);
 	return (1);
