@@ -12,15 +12,19 @@
 
 #include "../miniRT_bonus.h"
 
-t_light	*find_cur(t_elements *element)
+static void	insert_last(t_light *temp, t_elements *element)
 {
 	t_light	*cur;
 
 	cur = element->light;
-	while (cur != NULL)
-		cur = cur->next;
-	cur = ft_malloc(sizeof(t_light));
-	return (cur);
+	if (!cur)
+		element->light = temp;
+	else
+	{
+		while (cur->next)
+			cur = cur->next;
+		cur->next = temp;
+	}
 }
 
 int	parse_l_bonus(char **buffer, t_elements *element)
@@ -35,7 +39,7 @@ int	parse_l_bonus(char **buffer, t_elements *element)
 	rgb = ft_split(buffer[3], ", ");
 	if (split_num(rgb) != 3 || split_num(position) != 3)
 		return (0);
-	cur = find_cur(element);
+	cur = ft_malloc(sizeof(t_light));
 	cur->pos.x = ft_atof(position[0]);
 	cur->pos.y = ft_atof(position[1]);
 	cur->pos.z = ft_atof(position[2]);
@@ -44,7 +48,7 @@ int	parse_l_bonus(char **buffer, t_elements *element)
 	cur->green = ft_atoi(rgb[1]);
 	cur->blue = ft_atoi(rgb[2]);
 	cur->next = NULL;
-	element->light = cur;
+	insert_last(cur, element);
 	free_char(position);
 	free_char(rgb);
 	return (1);

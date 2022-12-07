@@ -41,7 +41,6 @@ void	hit_pl(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 	{
 		if (hit_plane(cur, ray, rec))
 		{
-			printf("%f %f %f\n", rec->pos.x, rec->pos.y, rec->pos.z);
 			*ret = vec3_set(cur->red, cur->green, cur->blue);
 			rec->tmax = rec->t;
 		}
