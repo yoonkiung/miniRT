@@ -28,7 +28,8 @@ t_vec3	uv_mapping(t_plane *plane, t_hit_record *rec)
 	return (vec3_set(50, 50, 50));
 }
 
-void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
+void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, \
+	t_ray *ray, t_vec3 *ret)
 {
 	t_plane	*cur;
 
@@ -37,7 +38,7 @@ void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
 	{
 		if (hit_plane(cur, ray, rec))
 		{
-			if (cur->ischeck)
+			if (cur->ischeck == 1)
 				*ret = uv_mapping(cur, rec);
 			else
 				*ret = vec3_set(cur->red, cur->green, cur->blue);

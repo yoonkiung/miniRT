@@ -18,7 +18,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
+// # include <mlx.h>
 # include "ray.h"
 # include <stdio.h>
 
@@ -73,10 +74,10 @@ typedef struct s_xpm
 	char			*img;
 	int				img_w;
 	int				img_h;
-	unsigned char	*addr;
 	int				line_length;
 	int				bits_per_pixel;
 	int				endian;
+	unsigned char	*addr;
 }	t_xpm;
 
 typedef struct s_sphere
