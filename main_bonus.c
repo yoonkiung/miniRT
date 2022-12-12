@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/12 17:12:47 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:31:20 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int	main(int ac, char **av)
 	t_elements	ele;
 	t_set		set;
 
-	set_mlx(&set, &ele);
+	set.mlx = mlx_init();
 	if (!init_bonus(ac, av, &ele, &set))
 		ft_exit(1);
+	set_mlx(&set, &ele);
 	if (ele.plane)
 		ele.plane->ischeck = 1;
 	drawing_bonus(&set);
