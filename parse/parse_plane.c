@@ -48,6 +48,7 @@ static bool	is_vaild(t_plane *ele)
 static void	put_variable(t_plane *temp, char **position, \
 					char **norm, char **rgb)
 {
+	temp->ischeck = 0;
 	temp->pos.x = ft_atof(position[0]);
 	temp->pos.y = ft_atof(position[1]);
 	temp->pos.z = ft_atof(position[2]);

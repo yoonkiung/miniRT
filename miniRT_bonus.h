@@ -30,7 +30,13 @@ t_vec3		phong_light_bonus(t_elements *ele, t_hit_record *rec);
 int			parse_l_bonus(char **buffer, t_elements *element);
 void		free_all_bonus(t_elements *ele, t_set *set);
 int			parse_sphere_bonus(char **buffer, t_elements *element, t_set *set);
-void		hit_sp_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
-void		hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret);
+void		hit_sp_bonus(t_elements *ele, t_hit_record *rec, \
+						t_ray *ray, t_vec3 *ret);
+void		hit_pl_bonus(t_elements *ele, t_hit_record *rec, \
+						t_ray *ray, t_vec3 *ret);
+t_vec3		my_mlx_pixel_get(t_xpm *data, int x, int y);
+t_vec3		rander_texture_map(t_sphere *sp, t_vec3 p);
+t_vec3		get_bump_map(t_sphere *sp, t_vec3 p);
+t_vec3		get_normal_vector(t_sphere *sp, t_hit_record *rec);
 
 #endif

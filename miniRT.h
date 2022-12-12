@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:52:12 by daechoi           #+#    #+#             */
-/*   Updated: 2022/12/09 19:02:29 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:07:07 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
+// # include <mlx.h>
 # include "ray.h"
 # include <stdio.h>
 
@@ -68,6 +69,17 @@ typedef struct s_light
 	struct s_light	*next;
 }	t_light;
 
+typedef struct s_xpm
+{
+	char			*img;
+	int				img_w;
+	int				img_h;
+	int				line_length;
+	int				bits_per_pixel;
+	int				endian;
+	unsigned char	*addr;
+}	t_xpm;
+
 typedef struct s_sphere
 {
 	t_vec3			pos;
@@ -76,6 +88,8 @@ typedef struct s_sphere
 	int				green;
 	int				blue;
 	struct s_sphere	*next;
+	t_xpm			texture;
+	t_xpm			bump;
 }	t_sphere;
 
 typedef struct s_plane

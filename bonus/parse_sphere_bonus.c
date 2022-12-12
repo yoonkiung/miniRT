@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 22:01:00 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/09 18:27:34 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:12:22 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	is_vaild(t_sphere *ele)
 void	parse_xpm(t_sphere *sphere, t_set *set)
 {
 	sphere->texture.img = mlx_xpm_file_to_image(set->mlx, \
-		"./asset/basketball.xpm", &sphere->texture.img_w, \
+		"./asset/moon_texture.xpm", &sphere->texture.img_w, \
 		&sphere->texture.img_h);
 	if (sphere->texture.img == NULL)
 		ft_exit(1);
@@ -50,7 +50,7 @@ void	parse_xpm(t_sphere *sphere, t_set *set)
 	sphere->texture.img, &sphere->texture.bits_per_pixel, \
 	&sphere->texture.line_length, &sphere->texture.endian);
 	sphere->bump.img = mlx_xpm_file_to_image(set->mlx, \
-		"./asset/basketball_bump.xpm", &sphere->bump.img_w, &sphere->bump.img_h);
+		"./asset/moon_bump2.xpm", &sphere->bump.img_w, &sphere->bump.img_h);
 	if (sphere->bump.img == NULL)
 		ft_exit(1);
 	sphere->bump.addr = (unsigned char *)mlx_get_data_addr(sphere->bump.img, \

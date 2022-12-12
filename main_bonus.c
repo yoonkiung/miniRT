@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/07 21:46:10 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:12:47 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int	main(int ac, char **av)
 	t_elements	ele;
 	t_set		set;
 
+	set_mlx(&set, &ele);
 	if (!init_bonus(ac, av, &ele, &set))
 		ft_exit(1);
 	if (ele.plane)
 		ele.plane->ischeck = 1;
-	set_mlx(&set, &ele);
 	drawing_bonus(&set);
 	set_keyhook_bonus(&set);
 	print_manual();
