@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:36:28 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/12 17:31:05 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 18:23:16 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	set_keyhook(t_set *set)
 void	set_mlx(t_set *set, t_elements *ele)
 {
 	set->ele = ele;
+	set->mlx = mlx_init();
 	set->win = mlx_new_window(set->mlx, WIDTH, HEIGHT, "miniRT");
 	set->select = init_select(set->ele->cam, set->ele->light);
 	set->img = ft_malloc(sizeof(t_img));

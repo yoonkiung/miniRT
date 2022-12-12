@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:25:45 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/12 17:31:20 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/12 18:23:39 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,18 @@ void	my_mlx_pixel_put_bonus(t_img *img, int x, int y, t_elements *ele)
 	*(unsigned int *)dst = rgb_color;
 }
 
+void	set_mlx_bonus(t_set *set, t_elements *ele)
+{
+	set->ele = ele;
+	set->mlx = mlx_init();
+	set->win = mlx_new_window(set->mlx, WIDTH, HEIGHT, "miniRT");
+	set->select = init_select(set->ele->cam, set->ele->light);
+	set->img = ft_malloc(sizeof(t_img));
+	set->img->img_ptr = mlx_new_image(set->mlx, WIDTH, HEIGHT);
+	set->img->data = mlx_get_data_addr(set->img->img_ptr, \
+		&set->img->bpp, &set->img->size_l, &set->img->endian);
+}
+
 int	main(int ac, char **av)
 {
 	t_elements	ele;
@@ -73,7 +85,7 @@ int	main(int ac, char **av)
 	set.mlx = mlx_init();
 	if (!init_bonus(ac, av, &ele, &set))
 		ft_exit(1);
-	set_mlx(&set, &ele);
+	set_mlx_bonus(&set, &ele);
 	if (ele.plane)
 		ele.plane->ischeck = 1;
 	drawing_bonus(&set);
