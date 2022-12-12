@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:34:57 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/11/23 16:39:19 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/09 18:52:36 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ bool	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 	if (root < rec->tmin || root > rec->tmax)
 		return (false);
 	rec->t = root;
-	if (!cal_root(vec3_dot(ray->dir, ray->dir), vec3_dot(vec3_sub(ray->pos, sp->pos), ray->dir) \
-		, vec3_dot(vec3_sub(ray->pos, sp->pos), \
-			vec3_sub(ray->pos, sp->pos)) - ((sp->dia / 2) * (sp->dia / 2)), rec))
-		return (false);
 	rec->pos = ray_at(ray, root);
 	rec->norm = vec3_dmul(1 / (sp->dia / 2), vec3_sub(rec->pos, sp->pos));
 	set_isfront(ray, rec);

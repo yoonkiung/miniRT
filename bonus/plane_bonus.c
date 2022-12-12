@@ -6,7 +6,7 @@
 /*   By: daechoi <daechoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 18:55:05 by kiyoon            #+#    #+#             */
-/*   Updated: 2022/12/07 22:39:35 by daechoi          ###   ########.fr       */
+/*   Updated: 2022/12/09 18:51:52 by daechoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_vec3	uv_mapping(t_plane *plane, t_hit_record *rec)
 	return (vec3_set(50, 50, 50));
 }
 
-void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, t_ray *ray, t_vec3 *ret)
+void	hit_pl_bonus(t_elements *ele, t_hit_record *rec, \
+						t_ray *ray, t_vec3 *ret)
 {
 	t_plane	*cur;
 
